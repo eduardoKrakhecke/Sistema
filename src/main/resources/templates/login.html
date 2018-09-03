@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <base href="/"></base>
+    <title>Adm</title>
+    <link rel="stylesheet" href="./bibliotecas/jQuery/angular/bootstrap/css/mdb.min.css">
+    <link rel="stylesheet" href="./bibliotecas/jQuery/angular/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bibliotecas/jQuery/angular/bootstrap/css/style.min.css">
+
+
+</head>
+<body>
+<div ng-controller="loginController as vm" ng-cloak>
+    <br>
+    <div class="row">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-lg-center">
+                <div class="card w-50">
+                    <div class="card-body ">
+                        <form class="text-center border border-light p-5" method="post" ng-submit="vm.autenticar()">
+                            <div class="md-form">
+                                <input required type="text" maxlength="50" id="inputlogin" class="form-control" ng-model="vm.usuario.login">
+                                <label for="inputlogin">Login</label>
+                            </div>
+                            <div class="md-form">
+                                <input required maxlength="8" type="password" id="inputsenha" class="form-control" ng-model="vm.usuario.senha">
+                                <label for="inputsenha">Senha</label>
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <div>
+                                    <a href="">Esqueceu a senha?</a>
+                                </div>
+                            </div>
+                            <button class="btn btn-blue-grey btn-block my-4" type="submit">Entrar</button>
+                            <a href="">Registre-se</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<!--<script type="text/javascript" src="./bibliotecas/jQuery/angular/bootstrap/js/jquery-3.3.1.min.js"></script>-->
+<script type="text/javascript" src="./bibliotecas/jQuery/angular/jquery.min.js"></script>
+<script type="text/javascript" src="./bibliotecas/jQuery/angular/angular.min.js"></script>
+<script type="text/javascript" src="./bibliotecas/jQuery/angular/angular-route.min.js"></script>
+<script type="text/javascript" src="./bibliotecas/jQuery/angular/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="./bibliotecas/jQuery/angular/angular-cookies.js"></script>
+
+
+<script type="text/javascript" src="./bibliotecas/jQuery/angular/bootstrap/js/popper.min.js"></script>
+<script type="text/javascript" src="./bibliotecas/jQuery/angular/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./bibliotecas/jQuery/angular/bootstrap/js/mdb.min.js"></script>
+
+<script type="text/javascript" src="./controllerTemplate/loginController.js"></script>
+<script type="text/javascript" src="./interceptor/token-interceptor.js"></script>
+
+</html>

@@ -1,5 +1,5 @@
 
-app.controller("homeController", function ($http, $location, $q, $cookies, usuario) {
+app.controller("homeController", function ($http, $location, $q, $cookies, usuario,$rootScope) {
 
     var vm = this;
     vm.usuario = {};
@@ -19,6 +19,9 @@ app.controller("homeController", function ($http, $location, $q, $cookies, usuar
     };
 
     vm.goToPagina = function (pagina) {
+        $rootScope.$evalAsync(function() {
+            $location.path(pagina);
+        });
         $location.path(pagina);
     };
 

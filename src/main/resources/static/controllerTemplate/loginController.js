@@ -9,8 +9,7 @@ app.controller("loginController", function ($http, $location, $q) {
                 location.href = "home#!/?parametros=";
             },
             function (response) {
-
+                notif({'type':'error','msg':'Usuário ou Senha inválida','position': 'center'})
             });
-
     };
 });

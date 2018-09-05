@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ngRoute","ui.router","ngCookies"]);
+var app = angular.module("app", ["ngRoute","ui.router","ngCookies",'ui.grid','ui.grid.pagination']);
 app.config(function($routeProvider, $locationProvider){
     $routeProvider
         .when("/usuario", {templateUrl:'/usuario/listaUsuario.html'})

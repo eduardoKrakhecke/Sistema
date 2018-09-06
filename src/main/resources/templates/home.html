@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html lang="pt-br"  ng-app="app">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="./bibliotecas/jQuery/angular/bootstrap/css/style.min.css">
     <link rel="stylesheet" href="./bibliotecas/jQuery/angular/uiGrid/ui-grid.css">
     <link rel="stylesheet" href="./cssTemplate/home.css">
+
+    <link rel="stylesheet" href="./module/listaProdutoComponent/listaProduto.css">
 
     <script type="text/javascript" src="./bibliotecas/jQuery/angular/bootstrap/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./bibliotecas/jQuery/angular/angular.min.js"></script>
@@ -98,7 +100,7 @@
     <div ng-include src="'./usuario/usuario.html'"></div>
 </div>
 
-<div class="container" ng-view=""></div>
+<div ng-view=""></div>
 
 
 <footer class="page-footer font-small blue-grey fixed-bottom">
@@ -115,6 +117,7 @@
 <script type="text/javascript" src="./bibliotecas/jQuery/angular/bootstrap/js/mdb.min.js"></script>
 
 <script type="text/javascript" src="./service/usuarioService.js"></script>
+<script type="text/javascript" src="./moduloService/produtoService.js"></script>
 
 <script type="text/javascript" src="./controllerTemplate/homeController.js"></script>
 <script type="text/javascript" src="./usuario/usuarioController.js"></script>

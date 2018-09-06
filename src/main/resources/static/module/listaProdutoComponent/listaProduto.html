@@ -1,13 +1,15 @@
 <meta charset="UTF-8"/>
+
 <base href="/"></base>
 <div ng-controller="listaProdutoController as vm">
-    <div class="p-lg-5"></div>
-    <div class="card">
-        <div class="card-body">
-            {{vm.tituloPanel}}
-        </div>
-        <div ui-grid="gridOptions" class="grid" ui-grid-pagination> </div>
+    <div class="mr-4 ml-4">
+        <div class="p-lg-5"></div>
+        <div class="card">
+            <div class="card-body">
+                {{vm.tituloPanel}}
+            </div>
+            <div ui-grid="vm.gridOptions" class="grid" ui-grid-pagination></div>
 
+        </div>
     </div>
 </div>
-

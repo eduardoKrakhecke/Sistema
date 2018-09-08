@@ -4,12 +4,50 @@
 <div ng-controller="listaProdutoController as vm">
     <div class="mr-4 ml-4">
         <div class="p-lg-5"></div>
-        <div class="card">
-            <div class="card-body">
+        <div class="card h-100">
+            <div class="card-header">
                 {{vm.tituloPanel}}
             </div>
-            <div ui-grid="vm.gridOptions" class="grid" ui-grid-pagination></div>
-
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group row col-md-12">
+                        <div class="form-group col-md-4">
+                            <input type="text" ng-model="vm.filtro" placeholder="Buscar" class="form-control mt-2 form-control-sm">
+                        </div>
+                        <div class="form-group col-md-8 ">
+                            <button type="button" data-toggle="modal" data-target="#modalCadastroProduto" class="btn btn-blue-grey btn-sm">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover table-sm table-bordered " cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="th-sm">Id
+                            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                        </th>
+                        <th class="th-sm">Descrição
+                            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                        </th>
+                        <th class="th-sm">Observação
+                            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="pro in vm.produtos">
+                    <tr>
+                        <td>{{pro.idProduto}}</td>
+                        <td>{{pro.descricao}}</td>
+                        <td>{{pro.observacao}}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modalCadastroProduto" role="dialog">
+    <div ng-include src="'./module/cadastroProdutoComponent/cadastroProduto.html'"></div>
 </div>

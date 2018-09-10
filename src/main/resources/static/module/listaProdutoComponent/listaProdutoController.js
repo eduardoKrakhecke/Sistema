@@ -5,11 +5,19 @@ app.controller("listaProdutoController", function ($scope, $http, $location, $q,
     vm.produtos=[];
     vm.tituloPanel="Produtos";
 
-    var paginationOptions = {pageNumber: 1, pageSize: 10, sort: null};
+    vm.pageNumber=0;
+    vm.pageSize=10;
+    vm.filtro="";
 
-        produto.getProdutoPaginado(paginationOptions.pageNumber, paginationOptions.pageSize).then(function (retorno) {
-            vm.produtos = retorno.content;
+    vm.filtrar = function(){
+        vm.carregarProdutos();
+    };
+
+    vm.carregarProdutos=function(){
+        produto.getProdutoPaginado(vm.pageNumber, vm.pageSize, vm.filtro ).then(function (retorno) {
+            vm.produtos = retorno.conteudo;
         });
+    };
 
 
 });

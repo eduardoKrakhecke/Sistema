@@ -3,6 +3,5 @@ app.controller("cadastroProdutoController", function ( $http, $location, $q,usua
     var vm = this;
     vm.produto={};
 
-    vm.produto="teste"
 
 });

@@ -5,5 +5,12 @@ app.service('produto', function($http) {
             var retorno=response.data;
             return retorno;
         });
+    };
+
+    this.salvar = function(produto) {
+        return $http({method : 'POST', url : '/user/produtos', data: produto}).then(function(response) {
+            var retorno=response.data;
+            return retorno;
+        });
     }
 });

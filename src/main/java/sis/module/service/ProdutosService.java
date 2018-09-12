@@ -16,12 +16,18 @@ import sis.module.repository.ProdutosRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 @Service
 public class ProdutosService {
 
     @Autowired
     ProdutosRepository produtosRepository;
+
+    @Transactional
+    public Produtos cadastrar(Produtos pro) {
+        return produtosRepository.save(pro);
+    }
 
     @PersistenceContext
     private EntityManager em;
@@ -35,8 +41,6 @@ public class ProdutosService {
         if ((filtro != null) && (filtro != "")) {
             criteria.add(Restrictions.ilike("descricao", filtro, MatchMode.ANYWHERE));
             criteriaCount.add(Restrictions.ilike("descricao", filtro, MatchMode.ANYWHERE));
-            criteria.add(Restrictions.ilike("observacao", filtro, MatchMode.ANYWHERE));
-            criteriaCount.add(Restrictions.ilike("observacao", filtro, MatchMode.ANYWHERE));
         }
         criteria.setFirstResult(page * size).setMaxResults(size).addOrder(Order.asc("descricao"));
 

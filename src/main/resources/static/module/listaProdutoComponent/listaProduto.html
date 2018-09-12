@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="form-group row col-md-12">
                         <div class="form-group col-md-1">
-                            <button type="button" ng-click="vm.proximaPagina()"  class="btn btn-blue-grey btn-sm"> > </button>
+                            <button type="button" ng-click="vm.proximaPagina()" class="btn btn-blue-grey btn-sm"> ></button>
                         </div>
                         <div class="mt-2 form-group col-md-1">
                             <select ng-change="vm.carregarProdutos(true)" ng-model="vm.quantidaDeRegistrosPorPagina" class="form-control-sm">
@@ -39,41 +39,41 @@
                             </select>
                         </div>
                         <div class="form-group col-md-1">
-                            <button type="button" ng-click="vm.paginaAnterior()" class="btn btn-blue-grey btn-sm"> < </button>
+                            <button type="button" ng-click="vm.paginaAnterior()" class="btn btn-blue-grey btn-sm"> <</button>
                         </div>
                     </div>
-                    </div>
                 </div>
+                <table class="table table-hover table-sm table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="th-sm">Id</th>
+                        <th class="th-sm">Descrição</th>
+                        <th class="th-sm">Observação</th>
+                        <th class="th-sm">Opções</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="pro in vm.produtos">
+                    <tr>
+                        <td>{{pro.idProduto}}</td>
+                        <td>{{pro.descricao}}</td>
+                        <td>{{pro.observacao}}</td>
+                        <td>
+                            <button class="btn btn-blue-grey btn-sm dropdown-toggle" type="button" data-toggle="dropdown"></button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item">Alterar</a>
+                                <a class="dropdown-item" ng-click="vm.excluir(pro)">Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
             </div>
-
         </div>
     </div>
-    <table class="table table-hover table-sm table-bordered" cellspacing="0" width="100%">
-        <thead>
-        <tr>
-            <th class="th-sm">Id</th>
-            <th class="th-sm">Descrição</th>
-            <th class="th-sm">Observação</th>
-            <th class="th-sm">Opções</th>
-        </tr>
-        </thead>
-        <tbody ng-repeat="pro in vm.produtos">
-        <tr>
-            <td>{{pro.idProduto}}</td>
-            <td>{{pro.descricao}}</td>
-            <td>{{pro.observacao}}</td>
-            <td>
-                <button class="btn btn-blue-grey btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item">Alterar</a>
-                    <a class="dropdown-item">Excluir</a>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        </tfoot>
-    </table>
+</div>
+
 </div>
 </div>
 

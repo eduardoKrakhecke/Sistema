@@ -1,0 +1,25 @@
+<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" role="dialog">
+    <div ng-controller="listaProdutoController as vm">
+        <div class="modal-dialog modal-lg modal-top" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Confirmação
+                </div>
+                <div class="modal-body">
+                    <form novalidate name="formExcluirProduto" role="form">
+                        <div class="row">
+                            <div class="form-group row col-md-12">
+                                <h4>Deseja excluir o registro permamentemente?</h4>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button data-dismiss="modal" ng-click="vm.confirmar()" class="btn btn-blue-grey btn-sm mt-1">Excluir</button>
+                    <button data-dismiss="modal" class="btn btn-blue-grey btn-sm mt-1">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

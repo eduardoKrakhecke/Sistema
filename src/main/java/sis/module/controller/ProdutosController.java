@@ -5,10 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sis.model.Pagina;
 import sis.module.model.Produtos;
 import sis.module.service.ProdutosService;
@@ -25,4 +22,14 @@ public class ProdutosController {
          Pagina produtosBuscados = produtosService.produtosPaginados(page, size, filtro);
         return new ResponseEntity<>(produtosBuscados, HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/produtos", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public HttpStatus cadastrar(@RequestBody Produtos produto){
+        produtosService.cadastrar(produto);
+        return HttpStatus.CREATED;
+    }
+
+
+
+
 }

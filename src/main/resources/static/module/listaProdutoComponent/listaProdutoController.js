@@ -12,8 +12,6 @@ app.controller("listaProdutoController", function ($scope, $http, $location, $q,
     vm.primeiraPagina = false;
     vm.ultimoRegistroDaPagina = 0;
 
-
-
     vm.proximaPagina = function() {
         vm.pagina++;
         vm.carregarProdutos();
@@ -44,6 +42,8 @@ app.controller("listaProdutoController", function ($scope, $http, $location, $q,
         });
     };
 
-    vm.carregarProdutos();
+    vm.excluir=function(produto){
+    };
 
+    vm.carregarProdutos();
 });

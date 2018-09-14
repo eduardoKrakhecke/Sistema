@@ -4,7 +4,7 @@
 <div ng-controller="listaProdutoController as vm">
     <div class="mr-4 ml-4">
         <div class="p-lg-5"></div>
-        <div class="card h-100">
+        <div class="card ">
             <div class="card-header">
                 {{vm.tituloPanel}}
             </div>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-hover table-sm table-bordered" cellspacing="0" width="100%">
+                <table class="table table-hover table-sm table-bordered " id="tableProduto" cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th class="th-sm">Id</th>
@@ -74,9 +74,8 @@
     </div>
 </div>
 
-</div>
-</div>
-
 <div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modalCadastroProduto" role="dialog">
     <div ng-include src="'./module/cadastroProdutoComponent/cadastroProduto.html'"></div>
 </div>
+
+

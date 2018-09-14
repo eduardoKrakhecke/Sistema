@@ -1,6 +1,7 @@
 
-app.controller("listaProdutoController", function ($scope, $http, $location, $q,usuario, produto) {
+app.controller("listaProdutoController", function ($scope, $http, $q,usuario, produto, $rootScope) {
     var vm = this;
+
     vm.produto={};
     vm.produtos=[];
     vm.tituloPanel="Produtos";
@@ -42,8 +43,17 @@ app.controller("listaProdutoController", function ($scope, $http, $location, $q,
         });
     };
 
-    vm.excluir=function(produto){
+    vm.excluir=function(pro){
+        mensagemConfirmacaoExclusao(function (result) {
+            if(result) {
+              produto.excluir(pro.idProduto).then(function (retorno){
+                  mensagemSucesso("Registro excluído com sucesso.");
+                  vm.carregarProdutos();
+              });
+            }
+        });
     };
 
     vm.carregarProdutos();
+
 });

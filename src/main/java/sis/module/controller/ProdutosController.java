@@ -29,7 +29,12 @@ public class ProdutosController {
         return HttpStatus.CREATED;
     }
 
-
+    @RequestMapping(method = RequestMethod.DELETE, value = "/produto/{id}")
+    public ResponseEntity<Produtos> excluirProduto(@PathVariable int id) {
+        Produtos pro = produtosService.buscaPorId(id);
+        produtosService.excluir(pro);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }

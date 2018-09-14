@@ -1,13 +1,13 @@
 
-app.controller("cadastroProdutoController", function ( $http, $location, $q,usuario, produto) {
+app.controller("cadastroProdutoController", function ( $scope, $controller, $http, $location, $q,usuario, produto) {
     var vm = this;
-    vm.produto={};
 
+    vm.produto={};
     vm.salvarProduto = function(){
         produto.salvar(vm.produto).then(function (retorno) {
 
         });
-        vm.carregarProdutos();
+
     };
 
 });

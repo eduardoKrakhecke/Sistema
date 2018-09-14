@@ -29,6 +29,14 @@ public class ProdutosService {
         return produtosRepository.save(pro);
     }
 
+    public Produtos buscaPorId(long id) {
+        return produtosRepository.findOne(id);
+    }
+
+    public void excluir(Produtos pro) {
+        produtosRepository.delete(pro);
+    }
+
     @PersistenceContext
     private EntityManager em;
 

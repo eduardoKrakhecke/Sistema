@@ -12,7 +12,7 @@ app.service('produto', function($http) {
             var retorno=response.data;
             return retorno;
         });
-    }
+    };
 
     this.excluir = function(idProduto) {
         return $http({method : 'DELETE', url : '/user/produto/'+ idProduto}).then(function(response) {

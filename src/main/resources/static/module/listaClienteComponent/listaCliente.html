@@ -1,5 +1,84 @@
 <meta charset="UTF-8"/>
 <base href="/"></base>
 <div ng-controller="listaClienteController as vm">
-    <h2 style="margin-top: 60px">AAAAAAAAAAAA</h2>
+    <div class="mr-4 ml-4">
+        <div class="p-lg-5"></div>
+        <div class="card ">
+            <div class="card-header">
+                {{vm.tituloPanel}}
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group row col-md-12">
+                        <div class="form-group col-md-4">
+                            <input type="text" ng-model="vm.filtro" ng-keyup="vm.filtrar($event)" placeholder="Buscar" class="form-control mt-2 form-control-sm">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <div class="float-right">
+                                <button type="button" data-toggle="modal" data-target="#modalCadastroCliente" class="btn btn-blue-grey btn-sm">Adicionar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group row col-md-12">
+                        <div class="form-group col-md-1">
+                            <button type="button" ng-click="vm.proximaPagina()" class="btn btn-blue-grey btn-sm"> ></button>
+                        </div>
+                        <div class="mt-2 form-group col-md-1">
+                            <select ng-change="vm.carregarClientes(true)" ng-model="vm.quantidaDeRegistrosPorPagina" class="form-control-sm">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <button type="button" ng-click="vm.paginaAnterior()" class="btn btn-blue-grey btn-sm"> <</button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover table-sm table-bordered " id="tableCliente" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="th-sm">Id</th>
+                        <th class="th-sm">Imagem</th>
+                        <th class="th-sm">Nome</th>
+                        <th class="th-sm">País</th>
+                        <th class="th-sm">Uf</th>
+                        <th class="th-sm">Município</th>
+                        <th class="th-sm">Opções</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="pes in vm.pessoas">
+                    <tr>
+                        <td>{{pes.idPessoa}}</td>
+                        <td> <img ng-src="{{pes.imagemPessoa || './image/semfoto.png'}}" alt="avatar" height="40" width="40" class="rounded-circle img-responsive"></td>
+                        <td>{{pes.nome}}</td>
+                        <td>{{pes.pais.nome}}</td>
+                        <td>{{pes.uf.nome}}</td>
+                        <td>{{pes.municipio.nome}}</td>
+                        <td>
+                            <button class="btn btn-blue-grey btn-sm dropdown-toggle" type="button" data-toggle="dropdown"></button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item">Alterar</a>
+                                <a class="dropdown-item" ng-click="vm.excluir(pes)">Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modalCadastroCliente" role="dialog">
+    <div ng-include src="'./module/cadastroClienteComponent/cadastroCliente.html'"></div>
 </div>

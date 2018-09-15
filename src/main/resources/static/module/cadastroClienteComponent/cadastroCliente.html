@@ -1,10 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-controller="cadastroClienteController as vm">
+    <div ng-controller="listaClienteController as vm">
+        <div class="modal-dialog modal-lg modal-top" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Cadastro de Cliente
+                </div>
+                <div class="modal-body">
+                    <form novalidate name="formCliente" role="form">
+                        <div class="row">
+                            <div class="form-group row col-md-12">
+                                <div class="form-group col-md-3">
+                                    <input type="number" ng-model="vm.pessoa.idPessoa" disabled placeholder="Id" class="form-control form-control-sm">
+                                </div>
+                                <div class="form-group col-md-9">
+                                    <input type="text" ng-model="vm.pessoa.nome" maxlength="60" placeholder="Nome" class="form-control form-control-sm">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <textarea placeholder="Observação"  maxlength="250" class="form-control form-control-sm" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button data-dismiss="modal" ng-click="vm.salvarCliente()" class="btn btn-blue-grey btn-sm mt-1">Salvar</button>
+                    <button class="btn btn-blue-grey btn-sm mt-1">Salvar e adicionar novo registro</button>
+                    <button data-dismiss="modal" class="btn btn-blue-grey btn-sm mt-1">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>

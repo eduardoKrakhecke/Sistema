@@ -54,6 +54,18 @@ app.controller("listaProdutoController", function ($scope, $http, $q,usuario, pr
         });
     };
 
+    vm.salvarProduto = function(){
+        produto.salvar(vm.produto).then(function (retorno) {
+            mensagemSucesso("Registro salvo com Sucesso.");
+            vm.limparCamposModalProduto();
+            vm.carregarProdutos();
+        });
+    };
+
+    vm.limparCamposModalProduto = function () {
+        vm.produto={};
+    };
+
     vm.carregarProdutos();
 
 });

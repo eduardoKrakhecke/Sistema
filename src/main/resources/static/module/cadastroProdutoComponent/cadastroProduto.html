@@ -1,30 +1,32 @@
 <div ng-controller="cadastroProdutoController as vm">
-    <div class="modal-dialog modal-lg modal-top" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                Cadastro de Produto
-            </div>
-            <div class="modal-body">
-                <form novalidate name="formProduto" role="form">
-                    <div class="row">
-                        <div class="form-group row col-md-12">
-                            <div class="form-group col-md-3">
-                                <input type="number" ng-model="vm.produto.idProduto" disabled placeholder="Id" class="form-control form-control-sm">
-                            </div>
-                            <div class="form-group col-md-9">
-                                <input type="text" ng-model="vm.produto.descricao" maxlength="60" placeholder="Descrição" class="form-control form-control-sm">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <textarea placeholder="Observação" ng-model="vm.produto.observacao" maxlength="250" class="form-control form-control-sm" rows="2"></textarea>
+    <div ng-controller="listaProdutoController as vm">
+        <div class="modal-dialog modal-lg modal-top" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Cadastro de Produto
+                </div>
+                <div class="modal-body">
+                    <form novalidate name="formProduto" role="form">
+                        <div class="row">
+                            <div class="form-group row col-md-12">
+                                <div class="form-group col-md-3">
+                                    <input type="number" ng-model="vm.produto.idProduto" disabled placeholder="Id" class="form-control form-control-sm">
+                                </div>
+                                <div class="form-group col-md-9">
+                                    <input type="text" ng-model="vm.produto.descricao" maxlength="60" placeholder="Descrição" class="form-control form-control-sm">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <textarea placeholder="Observação" ng-model="vm.produto.observacao" maxlength="250" class="form-control form-control-sm" rows="2"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button data-dismiss="modal" ng-click="vm.salvarProduto()" class="btn btn-blue-grey btn-sm mt-1">Salvar</button>
-                <button class="btn btn-blue-grey btn-sm mt-1">Salvar e adicionar novo registro</button>
-                <button data-dismiss="modal" class="btn btn-blue-grey btn-sm mt-1">Cancelar</button>
+                    </form>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button data-dismiss="modal" ng-click="vm.salvarProduto()" class="btn btn-blue-grey btn-sm mt-1">Salvar</button>
+                    <button class="btn btn-blue-grey btn-sm mt-1">Salvar e adicionar novo registro</button>
+                    <button data-dismiss="modal" class="btn btn-blue-grey btn-sm mt-1">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>

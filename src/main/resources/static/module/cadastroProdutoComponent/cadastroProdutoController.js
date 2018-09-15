@@ -1,13 +1,8 @@
 
-app.controller("cadastroProdutoController", function ( $scope, $controller, $http, $location, $q,usuario, produto) {
+app.controller("cadastroProdutoController", function (usuario, produto, $uibModal) {
     var vm = this;
-
     vm.produto={};
-    vm.salvarProduto = function(){
-        produto.salvar(vm.produto).then(function (retorno) {
 
-        });
 
-    };
 
 });

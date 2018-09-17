@@ -9,14 +9,29 @@
                     <form novalidate name="formCliente" role="form">
                         <div class="row">
                             <div class="form-group row col-md-12">
+                                <div class="form-group col-md-6">
+                                    <input type="text" ng-model="vm.pessoa.nome" maxlength="80" placeholder="Nome" class="form-control form-control-sm">
+                                </div>
                                 <div class="form-group col-md-3">
-                                    <input type="number" ng-model="vm.pessoa.idPessoa" disabled placeholder="Id" class="form-control form-control-sm">
+                                    <input type="text" ng-model="vm.pessoa.rg" maxlength="10" placeholder="RG" class="form-control form-control-sm">
                                 </div>
-                                <div class="form-group col-md-9">
-                                    <input type="text" ng-model="vm.pessoa.nome" maxlength="60" placeholder="Nome" class="form-control form-control-sm">
+                                <div class="form-group col-md-3">
+                                    <input type="text" ng-model="vm.pessoa.cpf" maxlength="10" placeholder="CPF" class="form-control form-control-sm">
                                 </div>
-                                <div class="form-group col-md-12">
-                                    <textarea placeholder="Observação"  maxlength="250" class="form-control form-control-sm" rows="2"></textarea>
+                                <div class=" form-group col-md-6">
+                                    <select ng-required="true" ng-model="vm.pessoa.idPais" ng-options="pais.idPais as pais.nome for pais in paises" class="form-control-sm ">
+                                        <option value=""  disabled selected>Selecione o país</option>
+                                    </select>
+                                </div>
+                                <div class=" form-group col-md-6">
+                                    <select  ng-blur="vm.selecionaMunicipioById(vm.pessoa.idUf)" ng-model="vm.pessoa.idUf" ng-options="uf.idUf as uf.nome for uf in ufs" class="form-control-sm ">
+                                        <option value=""  disabled selected>Selecione a Uf</option>
+                                    </select>
+                                </div>
+                                <div class=" form-group col-md-7">
+                                    <select ng-required="true" ng-model="vm.pessoa.idMunicipio"  class="form-control-sm ">
+                                        <option value=""  disabled selected>Selecione o Município</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

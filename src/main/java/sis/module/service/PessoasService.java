@@ -31,6 +31,10 @@ public class PessoasService {
         pessoasRepository.delete(pes);
     }
 
+    public Pessoas buscaPorId(long id) {
+        return pessoasRepository.findOne(id);
+    }
+
     @PersistenceContext
     private EntityManager em;
 

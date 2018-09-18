@@ -25,8 +25,17 @@ public class Pessoas implements Serializable {
     @Column(name = "cpf")
     private String cpf;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "telefone")
+    private String telefone;
+
+    @Column(name = "celular")
+    private String celular;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy="pessoa")
-    private List<PessoasContatos> pessoaContato;
+    private List<PessoasDocumentos> pessoaDocumentos;
 
     @JoinColumn(name = "id_municipio")
     @ManyToOne()
@@ -83,12 +92,36 @@ public class Pessoas implements Serializable {
         this.cpf = cpf;
     }
 
-    public List<PessoasContatos> getPessoaContato() {
-        return pessoaContato;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPessoaContato(List<PessoasContatos> pessoaContato) {
-        this.pessoaContato = pessoaContato;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public List<PessoasDocumentos> getPessoaDocumentos() {
+        return pessoaDocumentos;
+    }
+
+    public void setPessoaDocumentos(List<PessoasDocumentos> pessoaDocumentos) {
+        this.pessoaDocumentos = pessoaDocumentos;
     }
 
     public Municipios getMunicipio() {

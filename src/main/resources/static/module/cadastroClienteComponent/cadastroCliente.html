@@ -8,35 +8,75 @@
                 <div class="modal-body">
                     <form novalidate name="formCliente" role="form">
                         <div class="row">
-                            <div class="form-group row col-md-12">
-                                <div class="form-group col-md-6">
+                            <div class="form-group col-md-2">
+                                <div class="form-group">
+                                    <img type="image" width="120" height="120" class="rounded-circle img-responsive" ng-src="{{vm.pessoa.imagemPessoa || './image/semfoto.png' }}"
+                                         ng-model="vm.pessoa.imagemPessoa"/>
+                                    <input name="imagemPessoa" type="file" id="inputFile" onchange="readURL(this);" style="display: none;"/>
+                                </div>
+                            </div>
+                            <div class="form-group row col-md-10">
+                                <div class="form-group col-md-5">
                                     <input type="text" ng-model="vm.pessoa.nome" maxlength="80" placeholder="Nome" class="form-control form-control-sm">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <input type="text" ng-model="vm.pessoa.rg" maxlength="10" placeholder="RG" class="form-control form-control-sm">
                                 </div>
+                                <div class="form-group col-md-4">
+                                    <input type="text" ng-model="vm.pessoa.cpf" maxlength="11" placeholder="CPF" class="form-control form-control-sm">
+                                </div>
+                                <div class=" form-group col-md-5">
+                                    <select ng-required="true" ng-model="vm.pessoa.idPais" ng-options="pais.idPais as pais.nome for pais in paises" ng-change="vm.selecionaPais(vm.pessoa.idPais)"
+                                            class="form-control-sm col-md-12">
+                                        <option value="" disabled selected>Selecione o país</option>
+                                    </select>
+                                </div>
+                                <div class=" form-group col-md-3">
+                                    <select ng-disabled="vm.pessoa.idPais!=31" ng-model="vm.pessoa.idUf" ng-options="uf.idUf as uf.nome for uf in ufs" ng-change="vm.selecionaId(vm.pessoa.idUf)"
+                                            class="form-control-sm col-md-12">
+                                        <option value="" disabled selected>Selecione a Uf</option>
+                                    </select>
+                                </div>
+                                <div class=" form-group col-md-4">
+                                    <select ng-disabled="!vm.pessoa.idUf || vm.pessoa.idPais!=31" ng-model="vm.pessoa.idMunicipio" ng-options="mun.idMunicipio as mun.nome for mun in municipios"
+                                            class="form-control-sm col-md-12">
+                                        <option value="" disabled selected>Selecione o Município</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <input type="text" ng-model="vm.pessoa.email" maxlength="11" placeholder="Email" class="form-control form-control-sm">
+                                </div>
                                 <div class="form-group col-md-3">
-                                    <input type="text" ng-model="vm.pessoa.cpf" maxlength="10" placeholder="CPF" class="form-control form-control-sm">
+                                    <input type="text" ng-model="vm.pessoa.telefone" maxlength="11" placeholder="Telefone" class="form-control form-control-sm">
                                 </div>
-                                <div class=" form-group col-md-6">
-                                    <select ng-required="true" ng-model="vm.pessoa.idPais" ng-options="pais.idPais as pais.nome for pais in paises" ng-change="vm.selecionaPais(vm.pessoa.idPais)" class="form-control-sm ">
-                                        <option value=""  disabled selected>Selecione o país</option>
-                                    </select>
+                                <div class="form-group col-md-4">
+                                    <input type="text" ng-model="vm.pessoa.celular" maxlength="11" placeholder="Celular" class="form-control form-control-sm">
                                 </div>
-                                <div class=" form-group col-md-6">
-                                    <select  ng-disabled="vm.pessoa.idPais!=31" ng-model="vm.pessoa.idUf" ng-options="uf.idUf as uf.nome for uf in ufs" ng-change="vm.selecionaId(vm.pessoa.idUf)" class="form-control-sm ">
-                                        <option value=""  disabled selected>Selecione a Uf</option>
-                                    </select>
-                                </div>
-                                <div class=" form-group col-md-7">
-                                    <select ng-disabled="!vm.pessoa.idUf || vm.pessoa.idPais!=31" ng-model="vm.pessoa.idMunicipio" ng-options="mun.idMunicipio as mun.nome for mun in municipios" class="form-control-sm ">
-                                        <option value=""  disabled selected>Selecione o Município</option>
-                                    </select>
+                                <div class="form-group col-md-12">
+                                    <div class=" float-right">
+                                        <button class="btn btn-blue-grey btn-sm mt-1">Adicionar documentos</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row col-md-12">
+                            <div class="container-fluid">
+                                <div class="row col-md-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                        <tr>
+                                            <th >Tipo de documento</th>
+                                            <th >Documento</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-                            </div>
                         </div>
                     </form>
                 </div>

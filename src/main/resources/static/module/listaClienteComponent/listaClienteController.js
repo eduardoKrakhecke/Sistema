@@ -2,6 +2,7 @@
 app.controller("listaClienteController", function ($scope, $http, $q,usuario, endereco, cliente) {
     var vm = this;
 
+
     vm.pessoa={};
     vm.pessoas=[];
     vm.tituloPanel="Clientes";

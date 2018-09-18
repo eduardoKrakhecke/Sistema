@@ -5,3 +5,7 @@
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+
+.modal-lg {
+    max-width: 80% !important;
+}

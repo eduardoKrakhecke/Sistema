@@ -7,15 +7,11 @@
         <div class="card ">
             <div class="card-header">
                 {{vm.tituloPanel}}
-            </div>
-            <div class="card-header">
-                <div class="form-group col-md-12">
-                    <div class="float-right">
-                        <button type="button" class="btn btn-blue-grey btn-sm">Imprimir</button>
-                    </div>
-                    <div class="float-right">
-                        <button type="button" data-toggle="modal" data-target="#modalCadastroProduto" class="btn btn-blue-grey btn-sm">Adicionar</button>
-                    </div>
+                <div class="float-right">
+                    <button type="button" class="btn btn-blue-grey btn-sm">Imprimir</button>
+                </div>
+                <div class="float-right">
+                    <button type="button" data-toggle="modal" data-target="#modalCadastroProduto" class="btn btn-blue-grey btn-sm">Adicionar</button>
                 </div>
             </div>
             <div class="card-body">
@@ -48,32 +44,34 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-hover table-sm table-bordered " id="tableProduto" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th class="th-sm">Id</th>
-                        <th class="th-sm">Descrição</th>
-                        <th class="th-sm">Observação</th>
-                        <th class="th-sm">Opções</th>
-                    </tr>
-                    </thead>
-                    <tbody ng-repeat="pro in vm.produtos">
-                    <tr>
-                        <td>{{pro.idProduto}}</td>
-                        <td>{{pro.descricao}}</td>
-                        <td>{{pro.observacao}}</td>
-                        <td>
-                            <button class="btn btn-blue-grey btn-sm dropdown-toggle" type="button" data-toggle="dropdown"></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item">Alterar</a>
-                                <a class="dropdown-item" ng-click="vm.excluir(pro)">Excluir</a>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
+                <div class="table-wrapper-scroll-y">
+                    <table class="table table-hover table-sm table-bordered " id="tableProduto" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th class="th-sm">Id</th>
+                            <th class="th-sm">Descrição</th>
+                            <th class="th-sm">Observação</th>
+                            <th class="th-sm">Opções</th>
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="pro in vm.produtos">
+                        <tr>
+                            <td>{{pro.idProduto}}</td>
+                            <td>{{pro.descricao}}</td>
+                            <td>{{pro.observacao}}</td>
+                            <td>
+                                <button class="btn btn-blue-grey btn-sm dropdown-toggle" type="button" data-toggle="dropdown"></button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item">Alterar</a>
+                                    <a class="dropdown-item" ng-click="vm.excluir(pro)">Excluir</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

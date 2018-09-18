@@ -1,0 +1,7 @@
+.table-wrapper-scroll-y {
+    display: block;
+    min-height: 100px;
+    max-height: 350px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}

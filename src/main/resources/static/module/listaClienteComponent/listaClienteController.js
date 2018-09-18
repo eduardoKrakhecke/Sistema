@@ -43,5 +43,28 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
         });
     };
 
+    endereco.getPaises().then(function(retorno){
+        $scope.paises = retorno;
+    });
+
+    endereco.getUfs().then(function(retorno){
+        $scope.ufs = retorno;
+
+    });
+
+    vm.selecionaId = function(idUf){
+        endereco.getMunicipios(idUf).then(function(retorno){
+            $scope.municipios = retorno;
+        });
+    };
+
+    vm.selecionaPais = function(id){
+        if(id!==31){
+            vm.pessoa.idUf = null;
+            vm.pessoa.idMunicipio = null;
+        }
+    };
+
     vm.carregarClientes();
+
 });

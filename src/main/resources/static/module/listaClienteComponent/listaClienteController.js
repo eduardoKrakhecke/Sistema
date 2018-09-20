@@ -1,8 +1,8 @@
 
 app.controller("listaClienteController", function ($scope, $http, $q,usuario, endereco, cliente) {
     var vm = this;
-
-
+    vm.doc = {};
+    vm.pessoasDocumentos = [];
     vm.pessoa={};
     vm.pessoas=[];
     vm.tituloPanel="Clientes";
@@ -64,6 +64,15 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
             vm.pessoa.idUf = null;
             vm.pessoa.idMunicipio = null;
         }
+    };
+
+    vm.carregaImagem = function(){
+        carregaImagem();
+    };
+
+    vm.adicionarDocumento = function () {
+        vm.pessoasDocumentos.push(vm.doc)
+        vm.doc={};
     };
 
     vm.carregarClientes();

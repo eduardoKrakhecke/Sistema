@@ -9,3 +9,25 @@
 .modal-lg {
     max-width: 80% !important;
 }
+
+.btnReduzido {
+    padding: .0rem 0.4rem;
+    font-size: .6rem;
+}
+
+.scrollTableModal {
+    max-height: 200px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.modal-body {
+    max-height: calc(100vh - 210px) !important;
+    overflow-y: auto !important;
+}
+
+/*
+#tableProduto {
+    max-height: calc(100vh - 210px) !important;
+    overflow-y: auto !important;
+}*/

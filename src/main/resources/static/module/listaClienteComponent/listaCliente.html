@@ -60,7 +60,7 @@
                         <tbody ng-repeat="pes in vm.pessoas">
                         <tr>
                             <td>{{pes.idPessoa}}</td>
-                            <td><img ng-src="{{pes.imagemPessoa || './image/semfoto.png'}}" alt="avatar" height="40" width="40" class="rounded-circle img-responsive"></td>
+                            <td><img ng-src="{{pes.foto || './image/semfoto.png'}}" alt="avatar" height="40" width="40" class="rounded-circle img-responsive"></td>
                             <td>{{pes.nome}}</td>
                             <td>{{pes.pais.nome}}</td>
                             <td>{{pes.uf.nome}}</td>

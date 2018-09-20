@@ -2,8 +2,8 @@
 app.controller("listaClienteController", function ($scope, $http, $q,usuario, endereco, cliente) {
     var vm = this;
     vm.doc = {};
-    vm.pessoasDocumentos = [];
     vm.pessoa={};
+    vm.pessoa.pessoaDocumentos = [];
     vm.pessoas=[];
     vm.tituloPanel="Clientes";
     vm.quantidaDeRegistrosPorPagina="5";
@@ -50,7 +50,6 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
 
     endereco.getUfs().then(function(retorno){
         $scope.ufs = retorno;
-
     });
 
     vm.selecionaId = function(idUf){
@@ -61,8 +60,10 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
 
     vm.selecionaPais = function(id){
         if(id!==31){
-            vm.pessoa.idUf = null;
-            vm.pessoa.idMunicipio = null;
+            if( vm.pessoa.uf !== undefined){
+                vm.pessoa.uf.idUf = null;
+                vm.pessoa.uf.idMunicipio = null;
+            }
         }
     };
 
@@ -71,8 +72,25 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
     };
 
     vm.adicionarDocumento = function () {
-        vm.pessoasDocumentos.push(vm.doc)
+        vm.pessoa.pessoaDocumentos.push(vm.doc);
         vm.doc={};
+    };
+
+   vm.salvarCliente = function() {
+      cliente.salvar(vm.pessoa).then(function (retorno) {
+          mensagemSucesso("Registro salvo com sucesso");
+          vm.limparDadosModal();
+          vm.carregarClientes();
+      });
+    };
+
+   vm.limparDadosModal = function (){
+       vm.pessoa.foto = '';
+       vm.pessoa = {};
+   };
+
+    vm.limparModalDocumentos = function() {
+        vm.doc = {};
     };
 
     vm.carregarClientes();

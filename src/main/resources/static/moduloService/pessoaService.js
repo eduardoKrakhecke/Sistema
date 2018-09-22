@@ -15,7 +15,7 @@ app.service('cliente', function($http) {
     };
 
     this.excluir = function(idPessoa) {
-        return $http({method : 'DELETE', url : '/user/pessoas/'+ idPessoa}).then(function(response) {
+        return $http({method : 'DELETE', url : '/user/pessoa/'+ idPessoa}).then(function(response) {
             var retorno=response.data;
             return retorno;
         });

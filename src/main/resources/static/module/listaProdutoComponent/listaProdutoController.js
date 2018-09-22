@@ -62,6 +62,10 @@ app.controller("listaProdutoController", function ($scope, $http, $q,usuario, pr
         });
     };
 
+    vm.alterarProduto = function(pro){
+        vm.produto = pro;
+    };
+
     vm.limparCamposModalProduto = function () {
         vm.produto={};
     };

@@ -22,7 +22,7 @@ public class PessoasDocumentos implements Serializable {
 
     @JsonIgnore
     @JoinColumn(name="id_pessoa")
-    @ManyToOne( )
+    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY , optional = false)
     private Pessoas pessoa;
 
     public PessoasDocumentos() {

@@ -68,7 +68,7 @@
                             <td>
                                 <button class="btn btn-blue-grey btnReduzido dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item">Alterar</a>
+                                    <a data-toggle="modal" data-target="#modalCadastroCliente" ng-click="vm.alterar(pes)" class="dropdown-item">Alterar</a>
                                     <a class="dropdown-item" ng-click="vm.excluir(pes)">Excluir</a>
                                 </div>
                             </td>

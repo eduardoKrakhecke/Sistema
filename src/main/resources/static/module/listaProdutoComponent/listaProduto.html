@@ -62,7 +62,7 @@
                             <td>
                                 <button class="btn btn-blue-grey btnReduzido dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item">Alterar</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#modalCadastroProduto" ng-click="vm.alterarProduto(pro)" >Alterar</a>
                                     <a class="dropdown-item" ng-click="vm.excluir(pro)">Excluir</a>
                                 </div>
                             </td>
@@ -75,10 +75,11 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modalCadastroProduto" role="dialog">
+        <div ng-include src="'./module/cadastroProdutoComponent/cadastroProduto.html'"></div>
+    </div>
 </div>
 
-<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modalCadastroProduto" role="dialog">
-    <div ng-include src="'./module/cadastroProdutoComponent/cadastroProduto.html'"></div>
-</div>
+
 
 

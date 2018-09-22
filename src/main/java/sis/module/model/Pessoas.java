@@ -34,7 +34,7 @@ public class Pessoas implements Serializable {
     @Column(name = "celular")
     private String celular;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy="pessoa")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="pessoa")
     private List<PessoasDocumentos> pessoaDocumentos;
 
     @JoinColumn(name = "id_municipio")

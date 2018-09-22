@@ -93,6 +93,22 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
         vm.doc = {};
     };
 
+    vm.alterar = function(pes){
+        vm.pessoa = pes;
+        vm.selecionaId(pes.uf.idUf);
+    };
+
+    vm.excluir = function(pes){
+        mensagemConfirmacaoExclusao(function (result) {
+            if(result) {
+                cliente.excluir(pes.idPessoa).then(function (retorno){
+                    mensagemSucesso("Registro excluído com sucesso.");
+                    vm.carregarClientes();
+                });
+            }
+        });
+    };
+
     vm.carregarClientes();
 
 });

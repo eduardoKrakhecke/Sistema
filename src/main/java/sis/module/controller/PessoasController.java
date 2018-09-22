@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sis.model.Pagina;
 import sis.module.model.Pessoas;
+import sis.module.model.PessoasDocumentos;
 import sis.module.service.PessoasService;
 
 @RestController

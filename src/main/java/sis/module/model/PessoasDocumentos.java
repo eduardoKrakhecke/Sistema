@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Table(name = "pessoas_documentos", schema = "glb")
 public class PessoasDocumentos implements Serializable {
 
+    private static final long serialVersionUID = 4211323236058833945L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pessoa_documento")
@@ -22,7 +24,7 @@ public class PessoasDocumentos implements Serializable {
 
     @JsonIgnore
     @JoinColumn(name="id_pessoa")
-    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY , optional = false)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Pessoas pessoa;
 
     public PessoasDocumentos() {

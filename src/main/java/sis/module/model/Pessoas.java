@@ -2,11 +2,14 @@ package sis.module.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "pessoas", schema = "glb")
 public class Pessoas implements Serializable {
+
+    private static final long serialVersionUID = 4211334348833945L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +37,7 @@ public class Pessoas implements Serializable {
     @Column(name = "celular")
     private String celular;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="pessoa")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy="pessoa")
     private List<PessoasDocumentos> pessoaDocumentos;
 
     @JoinColumn(name = "id_municipio")

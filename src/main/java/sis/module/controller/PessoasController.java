@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sis.model.Pagina;
 import sis.module.model.Pessoas;
+
 import sis.module.model.PessoasDocumentos;
 import sis.module.service.PessoasDocumentosService;
 import sis.module.service.PessoasService;
@@ -30,16 +31,20 @@ public class PessoasController {
         return new ResponseEntity<>(pessoasBuscadas, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/pessoas", consumes = MediaType.APPLICATION_JSON_VALUE)
+
+   @RequestMapping(method = RequestMethod.POST, value = "/pessoas", consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpStatus cadastrar(@RequestBody Pessoas pessoa){
         List<PessoasDocumentos> pesDocList = new ArrayList<>();
         pessoasService.cadastrar(pessoa);
         for (int i = 0; i <pessoa.getPessoaDocumentos().size(); i++){
             PessoasDocumentos pesDoc = new PessoasDocumentos();
-            pesDoc.setDocumento(pessoa.getPessoaDocumentos().get(i).getDocumento());
-            pesDoc.setTipoDocumento(pessoa.getPessoaDocumentos().get(i).getTipoDocumento());
-            pesDoc.setPessoa(pessoa);
-            pesDocList.add(pesDoc);
+            if(pessoa.getPessoaDocumentos().get(i).getIdPessoaDocumento()!= null){
+                pesDoc.setIdPessoaDocumento(pessoa.getPessoaDocumentos().get(i).getIdPessoaDocumento());
+            }
+                pesDoc.setDocumento(pessoa.getPessoaDocumentos().get(i).getDocumento());
+                pesDoc.setTipoDocumento(pessoa.getPessoaDocumentos().get(i).getTipoDocumento());
+                pesDoc.setPessoa(pessoa);
+                pesDocList.add(pesDoc);
         }
         pessoasDocumentosService.cadastrar(pesDocList);
         return HttpStatus.CREATED;
@@ -49,6 +54,13 @@ public class PessoasController {
     public ResponseEntity<Pessoas> excluirPessoa(@PathVariable int id) {
         Pessoas pes = pessoasService.buscaPorId(id);
         pessoasService.excluir(pes);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/pessoaDocumento/{id}")
+    public ResponseEntity<PessoasDocumentos> excluirPessoaDocumento(@PathVariable int id) {
+        PessoasDocumentos pesDoc = pessoasDocumentosService.buscaPorId(id);
+        pessoasDocumentosService.excluir(pesDoc);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -24,7 +24,7 @@ public class PessoasDocumentos implements Serializable {
 
     @JsonIgnore
     @JoinColumn(name="id_pessoa")
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     private Pessoas pessoa;
 
     public PessoasDocumentos() {

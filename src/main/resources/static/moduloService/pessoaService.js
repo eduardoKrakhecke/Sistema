@@ -19,6 +19,13 @@ app.service('cliente', function($http) {
             var retorno=response.data;
             return retorno;
         });
+    };
+
+    this.excluirPessoaDocumento = function(idPessoaDocumento) {
+        return $http({method : 'DELETE', url : '/user/pessoaDocumento/'+ idPessoaDocumento}).then(function(response) {
+            var retorno=response.data;
+            return retorno;
+        });
     }
 
 });

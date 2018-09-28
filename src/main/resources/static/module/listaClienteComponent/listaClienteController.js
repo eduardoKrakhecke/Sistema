@@ -98,6 +98,13 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
         vm.selecionaId(pes.uf.idUf);
     };
 
+    vm.removerItemLista = function(pesDoc){
+        cliente.excluirPessoaDocumento(pesDoc.idPessoaDocumento).then(function (retorno){
+            pos = vm.pessoa.pessoaDocumentos.indexOf(pesDoc);
+            vm.pessoa.pessoaDocumentos.splice(pos, 1);
+        });
+    };
+
     vm.excluir = function(pes){
         mensagemConfirmacaoExclusao(function (result) {
             if(result) {

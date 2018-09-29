@@ -1,5 +1,5 @@
 
-app.controller("listaClienteController", function ($scope, $http, $q,usuario, endereco, cliente) {
+app.controller("listaClienteController", function ($scope, $http, $q,usuario, endereco, cliente, imprimir) {
     var vm = this;
     vm.doc = {};
     vm.pessoa={};
@@ -13,6 +13,8 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
     vm.ultimaPagina = false;
     vm.primeiraPagina = false;
     vm.ultimoRegistroDaPagina = 0;
+    vm.parametrosImpressao = {};
+
 
     vm.proximaPagina = function() {
         vm.pagina++;
@@ -114,6 +116,22 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
                 });
             }
         });
+    };
+
+
+    vm.gerarDocumento = function() {
+        var tipoLista = {lista: "cliente"};
+        angular.merge(vm.parametrosImpressao,tipoLista )
+        imprimir.imprimir({parametrosImpressao: vm.parametrosImpressao}).then(function (retorno) {
+            var corpoPdf = new Blob([response.data], {type: 'application/pdf'});
+            var caminhoURL = URL.createObjectURL(corpoPdf);
+            window.open(caminhoURL);
+        });
+    };
+
+
+    vm.limparModalImprimirCliente = function () {
+        vm.parametrosImpressao = {};
     };
 
     vm.carregarClientes();

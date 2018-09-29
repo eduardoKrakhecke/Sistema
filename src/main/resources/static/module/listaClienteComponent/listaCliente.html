@@ -10,7 +10,7 @@
                     <button type="button" data-toggle="modal" data-target="#modalCadastroCliente" class="btn btn-blue-grey btn-sm">Adicionar</button>
                 </div>
                 <div class="float-right">
-                    <button type="button" class="btn btn-blue-grey btn-sm">Imprimir</button>
+                    <button type="button" data-toggle="modal" data-target="#modalImprimir" class="btn btn-blue-grey btn-sm">Imprimir</button>
                 </div>
             </div>
             <div class="card-body">
@@ -86,6 +86,9 @@
     </div>
     <div class="modal fade " data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" id="modalAdicionarDoc" role="dialog">
         <div ng-include src="'./module/cadastroClienteComponent/modalDocumentos.html'"></div>
+    </div>
+    <div class="modal fade " data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" id="modalImprimir" role="dialog">
+        <div ng-include src="'./module/listaClienteComponent/modalImprimirCliente.html'"></div>
     </div>
 </div>
 

@@ -1,0 +1,58 @@
+<div class="modal-dialog modal-lg modal-top" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            Parâmetros para Impressão
+        </div>
+        <div class="modal-body">
+            <form novalidate name="formImprimir" role="form">
+                <div class="row">
+                    <div class="form-group row col-md-12">
+                        <div class="form-group col-md-2">
+                            <div class="custom-control custom-checkbox">
+                                <input ng-model="vm.habilitaFiltro" type="checkbox" id="check" class="custom-control-input" >
+                                <label class="custom-control-label" for="check" >Sem Filtros</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <div class="custom-control custom-checkbox">
+                                <input ng-model="vm.habilitaFiltroUf" type="checkbox" id="check1" class="custom-control-input" >
+                                <label class="custom-control-label" for="check1" >Uf</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group row col-md-12">
+                        <div class=" form-group col-md-4">
+                            <select ng-model="vm.parametrosImpressao.ordem" class="form-control-sm col-md-12">
+                                <option value="" disabled selected>Ordenação</option>
+                                <option value="nome">Nome do Cliente</option>
+                                <option value="municipio">Município</option>
+                                <option value="uf">Uf</option>
+                            </select>
+                        </div>
+                        <div class=" form-group col-md-4">
+                            <select ng-disabled="vm.habilitaFiltro" ng-model="vm.parametrosImpressao.filtro.uf" ng-options="uf.idUf as uf.nome for uf in ufs" ng-change="vm.selecionaId(vm.parametrosImpressao.filtro.uf)"
+                                    class="form-control-sm col-md-12">
+                                <option value="" disabled selected>Filtros Uf</option>
+                            </select>
+                        </div>
+                        <div class=" form-group col-md-4">
+                            <select ng-disabled="vm.habilitaFiltro" ng-model="vm.parametrosImpressao.filtro.municipio" ng-options="mun.idMunicipio as mun.nome for mun in municipios"
+                                    class="form-control-sm col-md-12">
+                                <option value="" disabled selected>Filtros Município</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+            <button data-dismiss="modal" ng-click="vm.gerarDocumento()" class="btn btn-blue-grey btn-sm mt-1">Gerar Documento</button>
+            <button ng-click="vm.limparModalImprimirCliente()" data-dismiss="modal" class="btn btn-blue-grey btn-sm mt-1">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+

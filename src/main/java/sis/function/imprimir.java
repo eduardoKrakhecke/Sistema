@@ -6,6 +6,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.util.JRLoader;
 import org.hibernate.internal.SessionImpl;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,24 +32,28 @@ public class imprimir {
     @PersistenceContext
     private EntityManager em;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/imprimir", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> buscarRelResumoTalonario(@RequestBody ObjectNode parametrosImpressao,  HttpServletResponse response) throws NumberFormatException, Exception {
+    @RequestMapping(method = RequestMethod.POST, value = "/imprimirCliente", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> gerarListaCliente(@RequestBody ObjectNode parametrosImpressao,  HttpServletResponse response) throws NumberFormatException, Exception {
         String mensagem="";
         InputStream arquivoJasper=null;
         byte[] bytes = null;
         Map<String, Object> parametrosJasper = new HashMap<>();
-        String nomeEstabelecimento = "";
-        String tipoLista;
-        tipoLista = String.valueOf(parametrosImpressao.get("parametrosImpressao").get("lista"));
+        int parametroUf = 0;
+        int parametroMunicipio = 0;
+        String ordenacao;
+        ordenacao = parametrosImpressao.get("parametrosImpressao").get("ordem").asText();
 
-        if ((parametrosImpressao.get("nomeEstabelecimento") == null) || (parametrosImpressao.get("nomeEstabelecimento").textValue() == "")) {
+            if(parametrosImpressao.get("parametrosImpressao").get("filtro").asText()!= null){
+                parametroUf = parametrosImpressao.get("parametrosImpressao").get("filtro").get("uf").asInt();
+            }
+            if(parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio")!=null){
+                parametroMunicipio = parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio").asInt();
+            }
 
-        }
-
-        if (parametrosImpressao.get("modeloDeRelatorio").asInt() == 4) {
-            parametrosJasper.put("filtros", "Estabelecimento: " + nomeEstabelecimento );
-            arquivoJasper = this.getClass().getResourceAsStream("/static/module/listaClienteComponent/relatorio.jasper");
-        }
+            parametrosJasper.put("ordenacao", ordenacao);
+            parametrosJasper.put("municipio", parametroMunicipio);
+            parametrosJasper.put("uf", parametroUf);
+            arquivoJasper = this.getClass().getResourceAsStream("/static/module/listaClienteComponent/relatorioCliente.jasper");
 
         try {
             Connection conexao = em.unwrap(SessionImpl.class).connection();

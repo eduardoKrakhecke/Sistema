@@ -120,10 +120,8 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
 
 
     vm.gerarDocumento = function() {
-        var tipoLista = {lista: "cliente"};
-        angular.merge(vm.parametrosImpressao,tipoLista )
         imprimir.imprimir({parametrosImpressao: vm.parametrosImpressao}).then(function (retorno) {
-            var corpoPdf = new Blob([response.data], {type: 'application/pdf'});
+            var corpoPdf = new Blob([retorno], {type: 'application/pdf'});
             var caminhoURL = URL.createObjectURL(corpoPdf);
             window.open(caminhoURL);
         });

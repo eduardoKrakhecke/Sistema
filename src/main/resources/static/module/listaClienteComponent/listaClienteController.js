@@ -87,7 +87,6 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
     };
 
    vm.limparDadosModal = function (){
-       vm.pessoa.foto = '';
        vm.pessoa = {};
    };
 
@@ -120,10 +119,12 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
 
 
     vm.gerarDocumento = function() {
+        carregando();
         imprimir.imprimir({parametrosImpressao: vm.parametrosImpressao}).then(function (retorno) {
             var corpoPdf = new Blob([retorno], {type: 'application/pdf'});
             var caminhoURL = URL.createObjectURL(corpoPdf);
             window.open(caminhoURL);
+            fecharModalLoad();
         });
     };
 

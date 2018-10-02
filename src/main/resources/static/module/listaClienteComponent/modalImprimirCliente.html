@@ -24,14 +24,6 @@
                 <div class="row">
                     <div class="form-group row col-md-12">
                         <div class=" form-group col-md-4">
-                            <select ng-model="vm.parametrosImpressao.ordem" class="form-control-sm col-md-12">
-                                <option value="" disabled selected>Ordenação</option>
-                                <option value="nome">Nome do Cliente</option>
-                                <option value="municipio">Município</option>
-                                <option value="uf">Uf</option>
-                            </select>
-                        </div>
-                        <div class=" form-group col-md-4">
                             <select ng-disabled="vm.habilitaFiltro" ng-model="vm.parametrosImpressao.filtro.uf" ng-options="uf.idUf as uf.nome for uf in ufs" ng-change="vm.selecionaId(vm.parametrosImpressao.filtro.uf)"
                                     class="form-control-sm col-md-12">
                                 <option value="" disabled selected>Filtros Uf</option>

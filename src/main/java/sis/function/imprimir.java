@@ -1,12 +1,12 @@
 package sis.function;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sun.istack.internal.Nullable;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.util.JRLoader;
 import org.hibernate.internal.SessionImpl;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.HashMap;
@@ -28,6 +27,8 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/user")
 public class imprimir {
+
+
 
     @PersistenceContext
     private EntityManager em;
@@ -38,21 +39,30 @@ public class imprimir {
         InputStream arquivoJasper=null;
         byte[] bytes = null;
         Map<String, Object> parametrosJasper = new HashMap<>();
-        int parametroUf = 0;
-        int parametroMunicipio = 0;
-        String ordenacao;
-        ordenacao = parametrosImpressao.get("parametrosImpressao").get("ordem").asText();
-
-            if(parametrosImpressao.get("parametrosImpressao").get("filtro").asText()!= null){
-                parametroUf = parametrosImpressao.get("parametrosImpressao").get("filtro").get("uf").asInt();
+        long parametroUfInicial = 0;
+        long parametroUfFinal = 0;
+        long parametroMunicipioInicial = 0;
+        long parametroMunicipioFinal = 0;
+            /*  tratar null*/
+            if(parametrosImpressao.get("parametrosImpressao").get("")!= null){
+                parametroUfInicial = parametrosImpressao.get("parametrosImpressao").get("filtro").get("uf").asLong();
+                parametroUfFinal =  parametrosImpressao.get("parametrosImpressao").get("filtro").get("uf").asLong();
             }
-            if(parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio")!=null){
-                parametroMunicipio = parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio").asInt();
+            else{
+                parametroUfFinal = 99999999999999L;
+            }
+            if( parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio")!=null){
+                parametroMunicipioInicial = parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio").asLong();
+                parametroMunicipioFinal =  parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio").asLong();
+            }
+            else{
+                parametroMunicipioFinal = 999999999999L;
             }
 
-            parametrosJasper.put("ordenacao", ordenacao);
-            parametrosJasper.put("municipio", parametroMunicipio);
-            parametrosJasper.put("uf", parametroUf);
+            parametrosJasper.put("idMunicipioInicial", parametroMunicipioInicial);
+            parametrosJasper.put("idMunicipioFinal", parametroMunicipioFinal);
+            parametrosJasper.put("idUfInicial", parametroUfInicial);
+            parametrosJasper.put("idUfFinal", parametroUfFinal);
             arquivoJasper = this.getClass().getResourceAsStream("/static/module/listaClienteComponent/relatorioCliente.jasper");
 
         try {
@@ -72,8 +82,6 @@ public class imprimir {
             conexao = null;
 
         } catch (JRException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
 

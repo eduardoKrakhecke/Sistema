@@ -1,7 +1,6 @@
 package sis.function;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sun.istack.internal.Nullable;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
@@ -29,45 +28,45 @@ import java.util.Map;
 public class imprimir {
 
 
-
     @PersistenceContext
     private EntityManager em;
 
     @RequestMapping(method = RequestMethod.POST, value = "/imprimirCliente", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> gerarListaCliente(@RequestBody ObjectNode parametrosImpressao,  HttpServletResponse response) throws NumberFormatException, Exception {
-        String mensagem="";
-        InputStream arquivoJasper=null;
+    public ResponseEntity<String> gerarListaCliente(@RequestBody ObjectNode parametrosImpressao, HttpServletResponse response) throws NumberFormatException, Exception {
+        String mensagem = "";
+        InputStream arquivoJasper = null;
         byte[] bytes = null;
         Map<String, Object> parametrosJasper = new HashMap<>();
         long parametroUfInicial = 0;
         long parametroUfFinal = 0;
         long parametroMunicipioInicial = 0;
         long parametroMunicipioFinal = 0;
-            /*  tratar null*/
-            if(parametrosImpressao.get("parametrosImpressao").get("")!= null){
-                parametroUfInicial = parametrosImpressao.get("parametrosImpressao").get("filtro").get("uf").asLong();
-                parametroUfFinal =  parametrosImpressao.get("parametrosImpressao").get("filtro").get("uf").asLong();
-            }
-            else{
-                parametroUfFinal = 99999999999999L;
-            }
-            if( parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio")!=null){
-                parametroMunicipioInicial = parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio").asLong();
-                parametroMunicipioFinal =  parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio").asLong();
-            }
-            else{
-                parametroMunicipioFinal = 999999999999L;
-            }
 
-            parametrosJasper.put("idMunicipioInicial", parametroMunicipioInicial);
-            parametrosJasper.put("idMunicipioFinal", parametroMunicipioFinal);
-            parametrosJasper.put("idUfInicial", parametroUfInicial);
-            parametrosJasper.put("idUfFinal", parametroUfFinal);
-            arquivoJasper = this.getClass().getResourceAsStream("/static/module/listaClienteComponent/relatorioCliente.jasper");
+        if (parametrosImpressao.get("semParametros").asText()=="true") {
+            parametroUfFinal = 99999999999L;
+            parametroMunicipioFinal = 99999999999999L;
+        } else {
+            parametroUfInicial = parametrosImpressao.get("parametrosImpressao").get("filtro").get("uf").asLong();
+            parametroUfFinal = parametrosImpressao.get("parametrosImpressao").get("filtro").get("uf").asLong();
+
+            if (parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio") != null) {
+                parametroMunicipioInicial = parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio").asLong();
+                parametroMunicipioFinal = parametrosImpressao.get("parametrosImpressao").get("filtro").get("municipio").asLong();
+            }
+            else{
+                parametroMunicipioFinal = 99999999999999L;
+            }
+        }
+
+        parametrosJasper.put("idMunicipioInicial", parametroMunicipioInicial);
+        parametrosJasper.put("idMunicipioFinal", parametroMunicipioFinal);
+        parametrosJasper.put("idUfInicial", parametroUfInicial);
+        parametrosJasper.put("idUfFinal", parametroUfFinal);
+        arquivoJasper = this.getClass().getResourceAsStream("/static/module/listaClienteComponent/relatorioCliente.jasper");
 
         try {
             Connection conexao = em.unwrap(SessionImpl.class).connection();
-            JasperReport arquivoJasperCarregado  = (JasperReport) JRLoader.loadObject(arquivoJasper);
+            JasperReport arquivoJasperCarregado = (JasperReport) JRLoader.loadObject(arquivoJasper);
             bytes = JasperRunManager.runReportToPdf(arquivoJasperCarregado, parametrosJasper, conexao);
             response.reset();
             response.resetBuffer();

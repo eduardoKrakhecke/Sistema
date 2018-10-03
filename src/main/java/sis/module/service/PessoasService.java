@@ -41,12 +41,22 @@ public class PessoasService {
     public Pagina pessoasPaginadas(int page, int size, String filtro) {
         Criteria criteria = em.unwrap(Session.class).createCriteria(Pessoas.class);
         Criteria criteriaCount =  em.unwrap(Session.class).createCriteria(Pessoas.class);
+        criteria.createAlias("uf", "uf");
+        criteriaCount.createAlias("uf", "uf");
+        criteria.createAlias("municipio", "municipio");
+        criteriaCount.createAlias("municipio", "municipio");
        /* criteria.add(Restrictions.eq("entidade.idEntidade", usuarioEntidade));
         criteriaCount.add(Restrictions.eq("entidade.idEntidade", usuarioEntidade));
 */
         if ((filtro != null) && (filtro != "")) {
-            criteria.add(Restrictions.ilike("nome", filtro, MatchMode.ANYWHERE));
-            criteriaCount.add(Restrictions.ilike("nome", filtro, MatchMode.ANYWHERE));
+            criteria.add(
+                    Restrictions.or(Restrictions.ilike("uf.nome", filtro, MatchMode.ANYWHERE),Restrictions.ilike("nome", filtro, MatchMode.ANYWHERE),
+                            Restrictions.or(Restrictions.ilike("municipio.nome", filtro, MatchMode.ANYWHERE),Restrictions.ilike("nome", filtro, MatchMode.ANYWHERE))
+            ));
+            criteriaCount.add(
+                    Restrictions.or(Restrictions.ilike("uf.nome", filtro, MatchMode.ANYWHERE),
+                            Restrictions.or(Restrictions.ilike("municipio.nome", filtro, MatchMode.ANYWHERE),
+                    Restrictions.ilike("nome", filtro, MatchMode.ANYWHERE))));
         }
         criteria.setFirstResult(page * size).setMaxResults(size).addOrder(Order.asc("nome"));
 

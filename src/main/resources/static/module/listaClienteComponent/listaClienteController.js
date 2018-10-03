@@ -14,6 +14,7 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
     vm.primeiraPagina = false;
     vm.ultimoRegistroDaPagina = 0;
     vm.parametrosImpressao = {};
+    vm.habilitaFiltro = true;
 
 
     vm.proximaPagina = function() {
@@ -79,6 +80,13 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
     };
 
    vm.salvarCliente = function() {
+       if(document.getElementById("imagem").getAttribute("src")!=='./image/semfoto.png'){
+           vm.pessoa.foto = document.getElementById("imagem").getAttribute("src");
+       }
+       else{
+           vm.pessoa.foto = null;
+       }
+       angular.merge(vm.pessoa,vm.pessoa.foto);
       cliente.salvar(vm.pessoa).then(function (retorno) {
           mensagemSucesso("Registro salvo com sucesso");
           vm.limparDadosModal();
@@ -120,17 +128,19 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
 
     vm.gerarDocumento = function() {
         carregando();
-        imprimir.imprimir({parametrosImpressao: vm.parametrosImpressao}).then(function (retorno) {
+        imprimir.imprimir({parametrosImpressao: vm.parametrosImpressao, semParametros: vm.habilitaFiltro}).then(function (retorno) {
             var corpoPdf = new Blob([retorno], {type: 'application/pdf'});
             var caminhoURL = URL.createObjectURL(corpoPdf);
             window.open(caminhoURL);
             fecharModalLoad();
+            vm.limparModalImprimirCliente();
         });
     };
 
 
     vm.limparModalImprimirCliente = function () {
         vm.parametrosImpressao = {};
+        vm.habilitaFiltro = true;
     };
 
     vm.carregarClientes();

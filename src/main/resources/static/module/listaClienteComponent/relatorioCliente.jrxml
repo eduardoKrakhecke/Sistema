@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioCliente" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" whenResourceMissingType="Empty" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioCliente" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="template.engine" value="tabular_template"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
@@ -58,13 +58,6 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="tableDataset" whenResourceMissingType="Empty" uuid="639bb709-5672-4fbd-b3c6-d0728bf3663f">
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
-		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<queryString language="SQL">
-			<![CDATA[]]>
-		</queryString>
-	</subDataset>
 	<subDataset name="Dataset1" whenResourceMissingType="Empty" uuid="7573b5d7-8687-4a4a-8454-5ea921831f7f">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
@@ -120,10 +113,33 @@ order by pes.nome]]>
 	<parameter name="idMunicipioInicial" class="java.lang.Long"/>
 	<parameter name="idMunicipioFinal" class="java.lang.Long"/>
 	<queryString>
-		<![CDATA[]]>
+		<![CDATA[select
+pes.nome as pessoa_nome,
+mun.nome as municipio_nome,
+uf.nome  as uf_nome,
+pa.nome as pais_nome
+from glb.pessoas pes 
+left join glb.municipios mun on mun.id_municipio= pes.id_municipio
+left join glb.ufs uf on uf.id_uf= pes.id_uf
+left join glb.paises pa on pa.id_pais= pes.id_pais
+where pes.id_municipio between  $P{idMunicipioInicial} and $P{idMunicipioFinal} 
+and  pes.id_uf  between $P{idUfInicial} and  $P{idUfFinal} 
+order by pes.nome]]>
 	</queryString>
+	<field name="pessoa_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pessoa_nome"/>
+	</field>
+	<field name="municipio_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="municipio_nome"/>
+	</field>
+	<field name="uf_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="uf_nome"/>
+	</field>
+	<field name="pais_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pais_nome"/>
+	</field>
 	<title>
-		<band height="75" splitType="Stretch">
+		<band height="102" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="553" height="60" backcolor="#000000" uuid="17682764-df02-4019-b2d7-8e75ca15e0ac"/>
 				<image>
@@ -134,95 +150,53 @@ order by pes.nome]]>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="60" width="553" height="14" forecolor="#000000" backcolor="#CFD0D1" uuid="7366c5da-9f57-4203-9be5-2771f0645269"/>
 			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="75" width="553" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="e1304caa-3d68-4d24-9278-6ac1abda8577"/>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="75" width="553" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="93422a64-0b01-4591-b41a-f6a3cd8543d7"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="1" width="40" height="20" forecolor="#FFFFFF" uuid="e517a8fc-df60-48c3-95be-f33513712e97"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="1" width="80" height="20" forecolor="#FFFFFF" uuid="1d0243b6-e0bc-49c2-a12a-33b6710b8737"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="20" forecolor="#FFFFFF" uuid="b5ca9966-211f-4d41-a394-872bbc68e062"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="32">
-			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="553" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="e1304caa-3d68-4d24-9278-6ac1abda8577"/>
-				<textField evaluationTime="Report">
-					<reportElement style="Column header" x="513" y="-4" width="40" height="20" forecolor="#FFFFFF" uuid="1444b6d2-894a-4b88-bda2-a2fe3e48c6db"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="Column header" x="433" y="-4" width="80" height="20" forecolor="#FFFFFF" uuid="55ede0d1-495e-4229-92ad-a2b748e9795d"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-				</textField>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement style="Column header" x="2" y="-3" width="197" height="20" forecolor="#FFFFFF" uuid="9b27e678-718d-4f68-8d1d-ceb2c87aec0c"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="553" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="b18ef686-bf84-4f7f-b471-6e72b9a740ac"/>
-				<textField evaluationTime="Report">
-					<reportElement style="Column header" x="513" y="-4" width="40" height="20" forecolor="#FFFFFF" uuid="db2be233-7f40-4086-b33e-19a9832e855b"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="Column header" x="433" y="-4" width="80" height="20" forecolor="#FFFFFF" uuid="c4a37655-0cff-40d4-9479-8c328420b693"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-				</textField>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement style="Column header" x="2" y="-3" width="197" height="20" forecolor="#FFFFFF" uuid="751f9ba7-ba50-4825-9762-76d9685354d6"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="553" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="93422a64-0b01-4591-b41a-f6a3cd8543d7"/>
-				<textField evaluationTime="Report">
-					<reportElement style="Column header" x="513" y="-4" width="40" height="20" forecolor="#FFFFFF" uuid="e517a8fc-df60-48c3-95be-f33513712e97"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="Column header" x="433" y="-4" width="80" height="20" forecolor="#FFFFFF" uuid="1d0243b6-e0bc-49c2-a12a-33b6710b8737"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-				</textField>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement style="Column header" x="2" y="-3" width="197" height="20" forecolor="#FFFFFF" uuid="b5ca9966-211f-4d41-a394-872bbc68e062"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
-			</frame>
-		</band>
-	</pageHeader>
-	<detail>
-		<band height="117" splitType="Immediate">
+	<summary>
+		<band height="96">
+			<staticText>
+				<reportElement x="0" y="4" width="100" height="20" uuid="682e994d-1660-406c-a407-8139ddbe0203"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Lista de Clientes]]></text>
+			</staticText>
 			<componentElement>
-				<reportElement x="1" y="31" width="553" height="60" uuid="4aa314f7-7198-4b35-b4ff-661928d6d657">
+				<reportElement isPrintRepeatedValues="false" x="1" y="27" width="553" height="60" uuid="4aa314f7-7198-4b35-b4ff-661928d6d657">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Dataset1" uuid="61ff7bfd-1d84-4778-a6a9-7e15a7d1575d">
+					<datasetRun subDataset="Dataset1" uuid="0e767a7f-81bd-433f-9b37-b01a6d32c49c">
 						<datasetParameter name="idMunicipioFinal">
 							<datasetParameterExpression><![CDATA[$P{idMunicipioFinal}]]></datasetParameterExpression>
 						</datasetParameter>
@@ -323,13 +297,6 @@ order by pes.nome]]>
 					</jr:column>
 				</jr:table>
 			</componentElement>
-			<staticText>
-				<reportElement x="0" y="1" width="100" height="20" uuid="682e994d-1660-406c-a407-8139ddbe0203"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Lista de Clientes]]></text>
-			</staticText>
 		</band>
-	</detail>
+	</summary>
 </jasperReport>

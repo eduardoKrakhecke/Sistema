@@ -28,6 +28,7 @@
     <script type="text/javascript" src="./bibliotecas/jQuery/angular/bootbox.min.js"></script>
     <script type="text/javascript" src="./bibliotecas/jQuery/angular/libraries/notifIt.min.js"></script>
 
+
     <script type="text/javascript" src="./mesages/mesages.js"></script>
     <script type="text/javascript" src="./functions/functions.js"></script>
 
@@ -59,6 +60,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarCadastros">
                         <a class="dropdown-item" ng-click="vm.goToPagina('cliente')">Clientes</a>
                         <a class="dropdown-item" ng-click="vm.goToPagina('produto')">Produtos</a>
+                        <a class="dropdown-item" ng-click="vm.goToPagina('estoque')">Estoque</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -77,6 +79,8 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarPedidos">
                         <a class="dropdown-item" ng-click="vm.goToPagina('orcamento')">Orçamento</a>
+                        <a class="dropdown-item" ng-click="vm.goToPagina('pedido')">Pedido</a>
+                        <a class="dropdown-item" ng-click="vm.goToPagina('notaFiscal')">Nota Fiscal</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -128,12 +132,14 @@
 <script type="text/javascript" src="./moduloService/enderecoService.js"></script>
 <script type="text/javascript" src="./moduloService/pessoaService.js"></script>
 <script type="text/javascript" src="./service/imprimirService.js"></script>
+<script type="text/javascript" src="./service/webCamService.js"></script>
+
 
 <script type="text/javascript" src="./controllerTemplate/homeController.js"></script>
 <script type="text/javascript" src="./usuario/usuarioController.js"></script>
 <script type="text/javascript" src="./module/listaProdutoComponent/listaProdutoController.js"></script>
 <script type="text/javascript" src="./module/listaClienteComponent/listaClienteController.js"></script>
-
+<script type="text/javascript" src="./module/listaEstoqueComponent/listaEstoqueController.js"></script>
 <script type="text/javascript" src="./module/cadastroProdutoComponent/cadastroProdutoController.js"></script>
 <script type="text/javascript" src="./module/cadastroClienteComponent/cadastroClienteController.js"></script>
 </html>

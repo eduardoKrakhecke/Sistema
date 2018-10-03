@@ -1,5 +1,5 @@
 
-app.controller("listaClienteController", function ($scope, $http, $q,usuario, endereco, cliente, imprimir) {
+app.controller("listaClienteController", function ( $scope, $http, $q,usuario, endereco, cliente, imprimir) {
     var vm = this;
     vm.doc = {};
     vm.pessoa={};
@@ -15,6 +15,8 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
     vm.ultimoRegistroDaPagina = 0;
     vm.parametrosImpressao = {};
     vm.habilitaFiltro = true;
+    vm.capturarFoto = false;
+
 
 
     vm.proximaPagina = function() {
@@ -96,6 +98,7 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
 
    vm.limparDadosModal = function (){
        vm.pessoa = {};
+       vm.capturarFoto = false;
    };
 
     vm.limparModalDocumentos = function() {
@@ -144,5 +147,8 @@ app.controller("listaClienteController", function ($scope, $http, $q,usuario, en
     };
 
     vm.carregarClientes();
+
+
+
 
 });

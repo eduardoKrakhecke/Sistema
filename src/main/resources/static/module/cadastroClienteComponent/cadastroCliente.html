@@ -5,11 +5,21 @@
         </div>
         <div class="modal-body">
             <form novalidate name="formCliente" role="form">
+                <div ng-hide="true" class="row">
+                    <div class="form-group col-md-12">
+                        <div  class="custom-control custom-checkbox form-group col-md-12">
+                            <div  class="form-group col-md-6">
+                                <input  ng-model="vm.capturarFoto" type="checkbox" id="checkCaptura" class="custom-control-input col-md-6">
+                                <label class="custom-control-label" for="checkCaptura"><p class="fontSize">Capturar foto com a câmera</p></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="form-group col-md-2">
+                    <div ng-if="!vm.capturarFoto" class="form-group col-md-2">
                         <div class="form-group">
                             <img type="image" ng-click="vm.carregaImagem()" name="imagem" id="imagem" width="120" height="125" class="img-responsive"
-                                 ng-model="vm.pessoa.foto"  ng-src="{{vm.pessoa.foto || './image/semfoto.png' }}"  />
+                                 ng-model="vm.pessoa.foto" ng-src="{{vm.pessoa.foto || './image/semfoto.png' }}"/>
                             <input name="imagem" type="file" id="inputFile" onchange="readURL(this);" style="display: none;"/>
                         </div>
                     </div>
@@ -36,7 +46,8 @@
                             </select>
                         </div>
                         <div class=" form-group col-md-4">
-                            <select ng-disabled="!vm.pessoa.uf.idUf || vm.pessoa.pais.idPais!=31" ng-model="vm.pessoa.municipio.idMunicipio" ng-options="mun.idMunicipio as mun.nome for mun in municipios"
+                            <select ng-disabled="!vm.pessoa.uf.idUf || vm.pessoa.pais.idPais!=31" ng-model="vm.pessoa.municipio.idMunicipio"
+                                    ng-options="mun.idMunicipio as mun.nome for mun in municipios"
                                     class="form-control-sm col-md-12">
                                 <option value="" disabled selected>Selecione o Município</option>
                             </select>

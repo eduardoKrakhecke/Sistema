@@ -4,6 +4,7 @@ app.config(function($routeProvider, $locationProvider){
         .when("/usuario", {templateUrl:'/usuario/listaUsuario.html'})
         .when("/produto", {templateUrl:'/module/listaProdutoComponent/listaProduto.html'})
         .when("/cliente", {templateUrl:'/module/listaClienteComponent/listaCliente.html'})
+        .when("/estoque", {templateUrl:'/module/listaEstoqueComponent/listaEstoque.html'})
         .otherwise({redirect:"/"});
 
     $locationProvider.html5Mode(false);

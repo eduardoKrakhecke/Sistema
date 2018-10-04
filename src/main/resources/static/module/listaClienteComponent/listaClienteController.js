@@ -15,8 +15,6 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
     vm.ultimoRegistroDaPagina = 0;
     vm.parametrosImpressao = {};
     vm.habilitaFiltro = true;
-    vm.capturarFoto = false;
-
 
 
     vm.proximaPagina = function() {

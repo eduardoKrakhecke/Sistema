@@ -27,7 +27,7 @@
                                 <button type="button" ng-click="vm.proximaPagina()" class="btn btn-blue-grey btn-sm"> ></button>
                             </div>
                             <div class="mt-2 form-group col-md-1">
-                                <select ng-change="vm.carregarEstoque(true)" ng-model="vm.quantidaDeRegistrosPorPagina" class="form-control-sm">
+                                <select ng-change="vm.carregarEstoques(true)" ng-model="vm.quantidaDeRegistrosPorPagina" class="form-control-sm">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="15">15</option>
@@ -49,7 +49,9 @@
                             <tr>
                                 <th class="th-sm">Id</th>
                                 <th class="th-sm">Produto</th>
-                                <th class="th-sm">Quantidade</th>>
+                                <th class="th-sm">Quantidade</th>
+                                <th class="th-sm">Valor</th>
+                                <th class="th-sm">Un. Medida</th>
                                 <th class="th-sm">Opções</th>
                             </tr>
                             </thead>
@@ -58,6 +60,8 @@
                                 <td>{{est.idEstoque}}</td>
                                 <td>{{est.produto.descricao}}</td>
                                 <td>{{est.quantidade}}</td>
+                                <td>{{est.valor}}</td>
+                                <td>{{est.unidadeMedida.descricao}}</td>
                                 <td>
                                     <button class="btn btn-blue-grey btnReduzido dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                     <div class="dropdown-menu">

@@ -1,7 +1,6 @@
 package sis.module.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import sis.model.Pagina;
 import sis.module.model.Produtos;
 import sis.module.service.ProdutosService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -36,5 +38,10 @@ public class ProdutosController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/produtosAutoComplete", params = {"parametro"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List search(@RequestParam("parametro") String parametro) {
+        List produtos = produtosService.buscarProdutosAutoComplete("%"+parametro+"%");
+        return produtos == null ? new ArrayList<>() : produtos;
+    }
 
 }

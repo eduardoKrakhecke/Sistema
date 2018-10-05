@@ -1,7 +1,8 @@
-app.controller("listaEstoqueController", function (imprimir, estoque) {
+app.controller("listaEstoqueController", function (imprimir, estoque, unidadeMedida) {
     var vm = this;
     vm.estoque = {};
     vm.estoques = [];
+    vm.unidadesMedidas =[];
     vm.quantidaDeRegistrosPorPagina="5";
     vm.pagina = 0;
     vm.filtro = "";
@@ -10,7 +11,6 @@ app.controller("listaEstoqueController", function (imprimir, estoque) {
     vm.primeiraPagina = false;
     vm.ultimoRegistroDaPagina = 0;
     vm.parametrosImpressao = {};
-
 
     vm.proximaPagina = function() {
         vm.pagina++;
@@ -40,6 +40,18 @@ app.controller("listaEstoqueController", function (imprimir, estoque) {
                 vm.ultimoRegistroDaPagina = vm.quantidadeDeRegistros;
             }
         });
+    };
+
+    unidadeMedida.getUnidadeMedida().then(function (retorno) {
+        vm.unidadesMedidas = retorno;
+    });
+
+    vm.carregaAutoComplete = function(parametro) {
+        if (parametro.trim() > 3) {
+            estoque.getProdutoAutoComplete(parametro).then(function (retorno) {
+                vm.produtos = retorno;
+            });
+        }
     };
 
     vm.carregarEstoques();

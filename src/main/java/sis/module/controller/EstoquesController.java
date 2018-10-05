@@ -23,4 +23,5 @@ public class EstoquesController {
         Pagina pessoasBuscadas = estoquesService.estoquePaginado(page, size, filtro);
         return new ResponseEntity<>(pessoasBuscadas, HttpStatus.OK);
     }
+
 }

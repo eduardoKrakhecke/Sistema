@@ -17,6 +17,7 @@ import sis.module.repository.ProdutosRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ProdutosService {
@@ -64,5 +65,9 @@ public class ProdutosService {
         pagina.setUltimaPagina(page == pagina.getQuantidadeDePaginas());
         pagina.setPrimeiraPagina(page == 0);
         return pagina;
+    }
+
+    public List<Produtos> buscarProdutosAutoComplete(String parametro){
+        return produtosRepository.search(parametro);
     }
 }

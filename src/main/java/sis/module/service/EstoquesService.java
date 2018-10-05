@@ -48,12 +48,12 @@ public class EstoquesService {
 */
         if ((filtro != null) && (filtro != "")) {
             criteria.add(
-                    Restrictions.or(Restrictions.ilike("produto.descricao", filtro, MatchMode.ANYWHERE),Restrictions.ilike("descricao", filtro, MatchMode.ANYWHERE),
-                            Restrictions.or(Restrictions.ilike("produto.descricao", filtro, MatchMode.ANYWHERE),Restrictions.ilike("descricao", filtro, MatchMode.ANYWHERE))
+                    Restrictions.or(Restrictions.ilike("produto.descricao", filtro, MatchMode.ANYWHERE),Restrictions.ilike("produto.descricao", filtro, MatchMode.ANYWHERE),
+                            Restrictions.or(Restrictions.ilike("produto.descricao", filtro, MatchMode.ANYWHERE),Restrictions.ilike("produto.descricao", filtro, MatchMode.ANYWHERE))
                     ));
             criteriaCount.add(
                     Restrictions.or(Restrictions.ilike("produto.descricao", filtro, MatchMode.ANYWHERE),
-                                    Restrictions.ilike("descricao", filtro, MatchMode.ANYWHERE)));
+                                    Restrictions.ilike("produto.descricao", filtro, MatchMode.ANYWHERE)));
         }
         criteria.setFirstResult(page * size).setMaxResults(size).addOrder(Order.asc("produto.descricao"));
 

@@ -8,5 +8,11 @@ app.service('estoque', function($http) {
         });
     };
 
+    this.getProdutoAutoComplete = function(parametro) {
+        return $http({method : 'GET', async:false, url : '/user/produtosAutoComplete?parametro='+parametro}).then(function(response) {
+            var retorno=response.data;
+            return retorno;
+        });
+    };
 
 });

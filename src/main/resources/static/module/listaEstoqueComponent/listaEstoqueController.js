@@ -1,4 +1,4 @@
-app.controller("listaEstoqueController", function (imprimir, estoque, unidadeMedida) {
+app.controller("listaEstoqueController", function ( $scope, imprimir, estoque, unidadeMedida) {
     var vm = this;
     vm.estoque = {};
     vm.estoques = [];
@@ -47,7 +47,7 @@ app.controller("listaEstoqueController", function (imprimir, estoque, unidadeMed
     });
 
     vm.carregaAutoComplete = function(parametro) {
-        if (parametro.trim() > 3) {
+        if (parametro.length > 3) {
             estoque.getProdutoAutoComplete(parametro).then(function (retorno) {
                 vm.produtos = retorno;
             });
@@ -55,5 +55,6 @@ app.controller("listaEstoqueController", function (imprimir, estoque, unidadeMed
     };
 
     vm.carregarEstoques();
+
 
 });

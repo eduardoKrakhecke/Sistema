@@ -1,3 +1,4 @@
+
 <div ng-controller="listaEstoqueController as vm">
     <div class="modal-dialog modal-lg modal-top" role="document">
         <div class="modal-content">
@@ -9,16 +10,24 @@
                     <div class="row">
                         <div class="form-group row col-md-12">
                             <div class="form-group col-md-12">
-
-
-                                <input type="text" ng-keyup="vm.carregaAutoComplete(search)" ng-model="search" class="form-control form-control-sm" placeholder="O que você procura?" autofocus autocomplete="off">
-
-                                <div class="autocomplete" ng-show="vm.completing">
-                                    <a class="link"  ng-repeat="pro in vm.produtos">
-
-                                    </a>
-                                </div>
-                               <!-- <input type="text" ng-model="vm.estoque.produto" maxlength="60" placeholder="Porduto" class="form-control form-control-sm">-->
+                                <div angucomplete-alt id="ex1"
+                                     placeholder="Search countries"
+                                     pause="100"
+                                     selected-object="selectedCountry"
+                                     local-data="produtos"
+                                     search-fields="descricao"
+                                     title-field="descricao"
+                                     minlength="3"
+                                     type="text"
+                                     input-class="form-control form-control-sm"
+                                     match-class="highlight"></div>
+                                <!--<input type="text" ng-model="vm.estoque.produto" ng-keyup="vm.carregaAutoComplete(vm.estoque.produto)"
+                                       class="form-control form-control-sm">
+                                <select ng-model="vm.estoque.produto.idProduto" ng-options="pro.idProduto as pro.descricao for pro in vm.produtos"
+                                        class="form-control-sm col-md-12">
+                                    <option value="" disabled selected>Selecione </option>
+                                     </div>
+                                </select>-->
                             </div>
                             <div class="form-group col-md-4">
                                 <input type="number" ng-model="vm.estoque.quantidade" min="0"  placeholder="Quantidade" class="form-control form-control-sm">

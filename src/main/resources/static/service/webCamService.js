@@ -1,5 +1,0 @@
-
-app.service('webCamService', function() {
-
-
-});

@@ -10,3 +10,7 @@ function carregaImagem() {
     };
     $("input[name='imagem']").click();
 }
+
+montaAutoComplete = function () {
+
+};

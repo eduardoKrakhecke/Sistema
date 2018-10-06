@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ngRoute","ui.router","ngCookies", "ui.bootstrap", "angucomplete-alt"]);
+var app = angular.module("app", ["ngRoute","ui.router","ngCookies", "ui.bootstrap"]);
 app.config(function($routeProvider, $locationProvider){
     $routeProvider
         .when("/usuario", {templateUrl:'/usuario/listaUsuario.html'})

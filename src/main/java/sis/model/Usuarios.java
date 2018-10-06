@@ -2,6 +2,7 @@ package sis.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="usuarios" , schema="glb", uniqueConstraints= @UniqueConstraint(columnNames={"login"}))
@@ -30,6 +31,9 @@ public class Usuarios implements Serializable {
 
     @Column(name = "foto_usuario", columnDefinition="TEXT")
     private String fotoUsuario;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy="usuario")
+    private List<Permissoes> permissoes;
 
     public Usuarios() {
     }
@@ -88,5 +92,13 @@ public class Usuarios implements Serializable {
 
     public void setFotoUsuario(String fotoUsuario) {
         this.fotoUsuario = fotoUsuario;
+    }
+
+    public List<Permissoes> getPermissoes() {
+        return permissoes;
+    }
+
+    public void setPermissoes(List<Permissoes> permissoes) {
+        this.permissoes = permissoes;
     }
 }

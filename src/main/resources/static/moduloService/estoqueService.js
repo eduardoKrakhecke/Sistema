@@ -15,4 +15,11 @@ app.service('estoque', function($http) {
         });
     };
 
+    this.salvar = function(estoque) {
+        return $http({method : 'POST', url : '/user/estoque', data: estoque}).then(function(response) {
+            var retorno=response.data;
+            return retorno;
+        });
+    };
+
 });

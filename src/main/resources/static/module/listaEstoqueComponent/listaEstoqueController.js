@@ -46,15 +46,34 @@ app.controller("listaEstoqueController", function ( $scope, imprimir, estoque, u
         vm.unidadesMedidas = retorno;
     });
 
-    vm.carregaAutoComplete = function(parametro) {
-        if (parametro.length > 3) {
+
+    vm.carregaAutoComplete = function () {
+        var dataList;
+        var parametro = vm.estoque.produto;
+        if(parametro.trim().length > 2){
             estoque.getProdutoAutoComplete(parametro).then(function (retorno) {
-                vm.produtos = retorno;
+                dataList = angular.element(document.querySelector('#produtos'));
+                dataList.empty();
+                if(retorno.length) {
+                    for(var i=0, len=retorno.length; i<len; i++) {
+                        var opt = $("<option >"+ retorno[i].descricao +" </option>").attr("value", retorno[i].idProduto);
+                        //var tempObj = [retorno[i]['descricao']] = retorno[i]['idProduto'];
+                        dataList.append(opt);
+                    }
+                }
             });
         }
     };
 
-    vm.carregarEstoques();
 
+    vm.salvarEstoque = function() {
+        estoque.salvar(vm.estoque).then(function (retorno) {
+            mensagemSucesso("Registro salvo com sucesso");
+            vm.limparDadosModal();
+            vm.carregarEstoques();
+        });
+    };
+
+    vm.carregarEstoques();
 
 });

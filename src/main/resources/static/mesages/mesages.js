@@ -1,6 +1,6 @@
-function mensagemConfirmacaoExclusao(callback) {
+function mensagemConfirmacaoExclusao(registro,callback) {
     bootbox.confirm({
-        message: "Ao continuar registro será excluído permanentemente",
+        message: "Ao continuar registro "+registro+ " será excluído permanentemente",
         buttons: {
             confirm: {
                 label: 'Excluir',

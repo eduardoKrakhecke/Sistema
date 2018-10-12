@@ -44,7 +44,7 @@ app.controller("listaProdutoController", function ($scope, $http, $q,usuario, pr
     };
 
     vm.excluir=function(pro){
-        mensagemConfirmacaoExclusao(function (result) {
+        mensagemConfirmacaoExclusao(pro.descricao,function (result) {
             if(result) {
               produto.excluir(pro.idProduto).then(function (retorno){
                   mensagemSucesso("Registro excluído com sucesso.");

@@ -1,7 +1,7 @@
 .table-wrapper-scroll-y {
     display: block;
     min-height: 100px;
-    max-height: 350px;
+    max-height: min-content;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -34,4 +34,27 @@
     max-height: calc(100vh - 210px) !important;
     overflow-y: auto !important;
 }*/
+
+.cabecalhoFixo{
+    padding-top: 40px;
+    position: fixed;
+    right: 24px;
+    top: 65px;
+    left: 24px;
+    background-color: #ffffff;
+
+}
+
+.table{
+    margin-bottom: 0 !important;
+}
+
+/*.card-body{
+    margin-top: 80px;
+    margin-bottom: 20px;
+}*/
+
+.body{
+    overflow: visible;
+}
 

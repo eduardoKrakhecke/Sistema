@@ -6,7 +6,7 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
     vm.pessoa.pessoaDocumentos = [];
     vm.pessoas=[];
     vm.tituloPanel="Clientes";
-    vm.quantidaDeRegistrosPorPagina="5";
+    vm.quantidaDeRegistrosPorPagina=12;
     vm.pagina = 0;
     vm.filtro = "";
     vm.quantidadeDeRegistros = 0;
@@ -16,33 +16,34 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
     vm.parametrosImpressao = {};
     vm.habilitaFiltro = true;
 
-
-    vm.proximaPagina = function() {
-        vm.pagina++;
-        vm.carregarClientes();
-    };
-
-    vm.paginaAnterior = function() {
-        vm.pagina--;
-        vm.carregarClientes();
-    };
-
     vm.filtrar = function(){
-        vm.carregarClientes();
+        if(vm.filtro.trim().length > 2){
+            vm.carregarClientes();
+        }
+        if(vm.filtro === ""){
+            vm.carregarClientes();
+        }
     };
 
-    vm.carregarClientes=function(zerarPaginacao){
-        if (zerarPaginacao){
-            vm.pagina = 0;
-        }
-        cliente.getPessoasPaginadas(vm.pagina, parseInt(vm.quantidaDeRegistrosPorPagina), vm.filtro ).then(function (retorno) {
+
+    vm.carregarClientes=function( ){
+     vm.pagina =0;
+        cliente.getPessoasPaginadas(vm.pagina, vm.quantidaDeRegistrosPorPagina, vm.filtro ).then(function (retorno) {
             vm.pessoas = retorno.conteudo;
             vm.quantidadeDeRegistros = retorno.quantidadeDeRegistros;
-            vm.ultimaPagina = retorno.ultimaPagina;
-            vm.primeiraPagina = retorno.primeiraPagina;
-            vm.ultimoRegistroDaPagina = vm.pagina * vm.quantidadeDeRegistros + parseInt(vm.quantidaDeRegistrosPorPagina);
-            if (vm.ultimoRegistroDaPagina > vm.quantidadeDeRegistros) {
-                vm.ultimoRegistroDaPagina = vm.quantidadeDeRegistros;
+        });
+    };
+
+    vm.carregarClientesRolagem = function(event,filtro){
+        if(filtro!==undefined){
+            vm.pagina =0;
+        } else{
+            filtro ="";
+            vm.pagina ++;
+        }
+        cliente.getPessoasPaginadas(vm.pagina, vm.quantidaDeRegistrosPorPagina, filtro ).then(function (retorno) {
+            for(var i =0; i <retorno.conteudo.length; i++){
+                vm.pessoas.push(retorno.conteudo[i]);
             }
         });
     };
@@ -89,6 +90,7 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
        angular.merge(vm.pessoa,vm.pessoa.foto);
       cliente.salvar(vm.pessoa).then(function (retorno) {
           mensagemSucesso("Registro salvo com sucesso");
+          vm.filtro="";
           vm.limparDadosModal();
           vm.carregarClientes();
       });
@@ -116,10 +118,11 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
     };
 
     vm.excluir = function(pes){
-        mensagemConfirmacaoExclusao(function (result) {
+        mensagemConfirmacaoExclusao(pes.nome,function (result) {
             if(result) {
                 cliente.excluir(pes.idPessoa).then(function (retorno){
                     mensagemSucesso("Registro excluído com sucesso.");
+                    vm.filtro="";
                     vm.carregarClientes();
                 });
             }
@@ -143,10 +146,6 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
         vm.parametrosImpressao = {};
         vm.habilitaFiltro = true;
     };
-
-    vm.carregarClientes();
-
-
 
 
 });

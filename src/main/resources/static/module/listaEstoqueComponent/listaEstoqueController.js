@@ -46,7 +46,6 @@ app.controller("listaEstoqueController", function ( $scope, imprimir, estoque, u
         vm.unidadesMedidas = retorno;
     });
 
-
     vm.carregaAutoComplete = function () {
         var dataList;
         var parametro = vm.estoque.produto;

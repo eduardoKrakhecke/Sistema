@@ -10,13 +10,18 @@
                     <div class="row">
                         <div class="form-group row col-md-12">
                             <div class="form-group col-md-12">
-
-                               <!-- <input list="produtos" type="text"
-                                       placeholder="Digite o nome do produto"
-                                       ng-model="vm.estoque.produto"
-                                       ng-keyup="vm.carregaAutoComplete($event)"
-                                       class="form-control form-control-sm" />
-                                <datalist id="produtos"></datalist>-->
+                                <md-autocomplete md-selected-item="vm.estoque.produto"
+                                                 md-search-text="parametro"
+                                                 placeholder="Digite a descrição do produto"
+                                                 md-items="produto in vm.carregaAutoComplete(parametro)"
+                                                 md-item-text="produto.descricao">
+                                    <md-item-template>
+                                        <span md-highlight-text="parametro">{{produto.descricao}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                       Nenhum registro encontrado. Deseja Cadastrar <a data-toggle="modal" data-target="#modalCadastroProduto">{{parametro}}</a> ?
+                                    </md-not-found>
+                                </md-autocomplete>
                             </div>
                             <div class="form-group col-md-4">
                                 <input type="number" ng-model="vm.estoque.quantidade" min="0"  placeholder="Quantidade" class="form-control form-control-sm">
@@ -37,10 +42,13 @@
             <div class="modal-footer d-flex justify-content-center">
                 <button data-dismiss="modal" ng-click="vm.salvarEstoque()" class="btn btn-blue-grey btn-sm mt-1">Salvar</button>
                 <button class="btn btn-blue-grey btn-sm mt-1">Salvar e adicionar novo registro</button>
-                <button data-dismiss="modal" class="btn btn-blue-grey btn-sm mt-1">Cancelar</button>
+                <button ng-click=" vm.limparDadosModal()" data-dismiss="modal" class="btn btn-blue-grey btn-sm mt-1">Cancelar</button>
             </div>
         </div>
     </div>
 </div>
 
 
+<div class="modal fade" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" id="modalCadastroProduto" role="dialog">
+    <div ng-include src="'./module/cadastroProdutoComponent/cadastroProduto.html'"></div>
+</div>

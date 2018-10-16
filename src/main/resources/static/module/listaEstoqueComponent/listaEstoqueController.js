@@ -46,22 +46,11 @@ app.controller("listaEstoqueController", function ( $scope, imprimir, estoque, u
         vm.unidadesMedidas = retorno;
     });
 
-    vm.carregaAutoComplete = function () {
-        var dataList;
-        var parametro = vm.estoque.produto;
-        if(parametro.trim().length > 2){
-            estoque.getProdutoAutoComplete(parametro).then(function (retorno) {
-                dataList = angular.element(document.querySelector('#produtos'));
-                dataList.empty();
-                if(retorno.length) {
-                    for(var i=0, len=retorno.length; i<len; i++) {
-                        var opt = $("<option >"+ retorno[i].descricao +" </option>").attr("value", retorno[i].idProduto);
-                        //var tempObj = [retorno[i]['descricao']] = retorno[i]['idProduto'];
-                        dataList.append(opt);
-                    }
-                }
-            });
-        }
+
+    vm.carregaAutoComplete = function(searchText) {
+        return estoque.getProdutoAutoComplete(searchText).then(function (retorno) {
+           return retorno;
+        });
     };
 
 
@@ -71,6 +60,10 @@ app.controller("listaEstoqueController", function ( $scope, imprimir, estoque, u
             vm.limparDadosModal();
             vm.carregarEstoques();
         });
+    };
+
+    vm.limparDadosModal = function(){
+      vm.estoque = {};
     };
 
     vm.carregarEstoques();

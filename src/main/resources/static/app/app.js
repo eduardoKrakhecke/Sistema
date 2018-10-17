@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ngRoute","ui.router","ngCookies","ngMaterial", "infinite-scroll"]).value ('THROTTLE_MILLISECONDS', 1500);
+var app = angular.module("app", ["ngRoute","ui.router","ngCookies","ngMaterial","md.data.table", "fixed.table.header","infinite-scroll"]).value ('THROTTLE_MILLISECONDS', 1500);
 app.config(function($routeProvider, $locationProvider){
     $routeProvider
         .when("/usuario", {templateUrl:'/usuario/listaUsuario.html'})

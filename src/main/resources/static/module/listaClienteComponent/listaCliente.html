@@ -3,69 +3,78 @@
 <div ng-controller="listaClienteController as vm">
     <div class="mr-4 ml-4">
         <div class="card margem">
-        <div class="card ">
-            <div  class="card-header">
-                <div class="form-group row col-md-12">
-                    <div class="col-md-12">
-                        <p >{{vm.tituloPanel}}</p>
-                    </div>
-                        <div class="col-md-4">
-                            <input type="text" ng-model="vm.filtro" ng-keyup="vm.filtrar($event)" placeholder="Buscar(nome da pessoa, uf ou município)" class="form-group mt-2 form-control form-control-sm">
-                        </div>
-                    <div class="col-md-5 float-right">
-                            <button type="button" data-toggle="modal" data-target="#modalCadastroCliente" class="btn btn-blue-grey btn-sm">Adicionar</button>
-                            <button type="button" data-toggle="modal" data-target="#modalImprimir" class="btn btn-blue-grey btn-sm">Imprimir</button>
-                    </div>
+            <div class="card ">
+                <div class="card-header">
+                    <p>{{vm.tituloPanel}}</p>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="form-group row col-md-12">
-
-                    </div>
-                </div>
-                <div infinite-scroll="vm.carregarClientesRolagem(vm.filtro)" id="fixed-table-container-demo" class="fixed-table-container">
-                    <table  class="table table-hover table-sm table-bordered" id="tableCliente" cellspacing="0" width="100%" >
-                        <thead >
-                        <tr>
-                            <th class="th-sm">Id</th>
-                            <th class="th-sm">Imagem</th>
-                            <th class="th-sm">Nome</th>
-                            <th class="th-sm">País</th>
-                            <th class="th-sm">Uf</th>
-                            <th class="th-sm">Município</th>
-                            <th class="th-sm">Opções</th>
-                        </tr>
-                        </thead>
-                        <tbody ng-repeat="pes in vm.pessoas">
-                        <tr>
-                            <td>{{pes.idPessoa}}</td>
-                            <td><img ng-src="{{pes.foto || './image/semfoto.png'}}" alt="avatar" height="40" width="40" class="rounded-circle img-responsive"></td>
-                            <td>{{pes.nome}}</td>
-                            <td>{{pes.pais.nome}}</td>
-                            <td>{{pes.uf.nome}}</td>
-                            <td>{{pes.municipio.nome}}</td>
-                            <td>
-                                <button class="btn btn-blue-grey btnReduzido dropdown-toggle" type="button" data-toggle="dropdown"></button>
-                                <div class="dropdown-menu">
-                                    <a data-toggle="modal" data-target="#modalCadastroCliente" ng-click="vm.alterar(pes)" class="dropdown-item">Alterar</a>
-                                    <a class="dropdown-item" ng-click="vm.excluir(pes)">Excluir</a>
+                <div class="card-body">
+                    <div infinite-scroll="vm.carregarClientesRolagem(vm.filtro)" id="fixed-table-container-demo" class="fixed-table-container">
+                        <div >
+                        <md-toolbar class="md-table-toolbar md-default">
+                            <div layout="row">
+                                <div flex flex-grow="10">
+                                    <input type="text" ng-model="vm.filtro" ng-keyup="vm.filtrar($event)" placeholder="Buscar(nome da pessoa, uf ou município)" class="form-group mt-2 form-control form-control-sm col-md-6">
                                 </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        </tfoot>
-                    </table>
+                                <div class="float-right" flex-grow="20">
+                                    <button type="button" data-toggle="modal" data-target="#modalCadastroCliente" class="btn btn-blue-grey btn-sm">Adicionar</button>
+                                    <button type="button" data-toggle="modal" data-target="#modalImprimir" class="btn btn-blue-grey btn-sm">Imprimir</button>
+                                </div>
+                            </div>
+                        </md-toolbar>
+                        </div>
+                        <md-table-container>
+                            <table md-table md-row-select multiple ng-model="vm.selected" md-progress="promise">
+                                <thead md-head>
+                                <tr md-row>
+                                    <th md-column>Id</th>
+                                    <th md-column md-numeric>Imagem</th>
+                                    <th md-column md-numeric>Nome</th>
+                                    <th md-column md-numeric>Pais</th>
+                                    <th md-column md-numeric>Uf</th>
+                                    <th md-column md-numeric>Município</th>
+                                    <th md-column md-numeric>Opções</th>
+                                </tr>
+                                </thead>
+                                <tbody md-body>
+                                <tr md-row md-select="pes" md-select-id="name" md-auto-select ng-repeat="pes in vm.pessoas">
+                                    <td md-cell>{{pes.idPessoa}}</td>
+                                    <td md-cell><img ng-src="{{pes.foto || './image/semfoto.png'}}" alt="avatar" height="40" width="40" class="rounded-circle img-responsive"></td>
+                                    <td md-cell>{{pes.nome}}</td>
+                                    <td md-cell>{{pes.pais.nome}}</td>
+                                    <td md-cell>{{pes.uf.nome}}</td>
+                                    <td md-cell>{{pes.municipio.nome}}</td>
+                                    <td md-cell>
+                                        <md-fab-speed-dial ng-hide="demo.hidden" md-direction="left" md-open="demo.isOpen"
+                                                           class="md-scale md-fab-md-mini-top-right" ng-class="{ 'md-hover-full': demo.hover }"
+                                                           ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+                                            <md-fab-trigger>
+                                                <md-button aria-label="menu" class="md-fab md-md-mini md-primary">
+                                                    <md-icon class="material-icons">menu</md-icon>
+                                                </md-button>
+                                            </md-fab-trigger>
+                                            <md-fab-actions>
+                                                <md-button data-toggle="modal" data-target="#modalCadastroCliente" ng-click="vm.alterar(pes)" class="md-fab md-raised md-mini md-da">
+                                                    <md-icon class="material-icons">edit</md-icon>
+                                                </md-button>
+                                                <md-button ng-click="vm.excluir(pes)" class="md-fab md-raised md-mini">
+                                                    <md-icon alt="Excluir" class="material-icons">delete_forever</md-icon>
+                                                </md-button>
+                                            </md-fab-actions>
+                                        </md-fab-speed-dial>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </md-table-container>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
     <div class="modal fade" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" id="modalCadastroCliente" role="dialog">
         <div ng-include src="'./module/cadastroClienteComponent/cadastroCliente.html'"></div>
     </div>
-    <div class="modal fade " data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" id="modalAdicionarDoc" role="dialog">
+    <div class="modal fade "  data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" id="modalAdicionarDoc" role="dialog">
         <div ng-include src="'./module/cadastroClienteComponent/modalDocumentos.html'"></div>
     </div>
     <div class="modal fade " data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" id="modalImprimir" role="dialog">

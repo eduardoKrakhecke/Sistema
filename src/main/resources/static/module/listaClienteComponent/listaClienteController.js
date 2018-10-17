@@ -6,7 +6,7 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
     vm.pessoa.pessoaDocumentos = [];
     vm.pessoas=[];
     vm.tituloPanel="Clientes";
-    vm.quantidaDeRegistrosPorPagina=12;
+    vm.quantidaDeRegistrosPorPagina=8;
     vm.pagina = 0;
     vm.filtro = "";
     vm.quantidadeDeRegistros = 0;
@@ -15,6 +15,7 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
     vm.ultimoRegistroDaPagina = 0;
     vm.parametrosImpressao = {};
     vm.habilitaFiltro = true;
+    vm.selected = [];
 
     vm.filtrar = function(){
         if(vm.filtro.trim().length > 2){

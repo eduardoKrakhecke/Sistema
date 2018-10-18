@@ -16,23 +16,29 @@
                                     <input type="text" ng-model="vm.filtro" ng-keyup="vm.filtrar($event)" placeholder="Buscar(nome da pessoa, uf ou município)" class="form-group mt-2 form-control form-control-sm col-md-6">
                                 </div>
                                 <div class="float-right" flex-grow="20">
-                                    <button type="button" data-toggle="modal" data-target="#modalCadastroCliente" class="btn btn-blue-grey btn-sm">Adicionar</button>
-                                    <button type="button" data-toggle="modal" data-target="#modalImprimir" class="btn btn-blue-grey btn-sm">Imprimir</button>
+                                    <md-button data-toggle="modal" data-target="#modalCadastroCliente" class="md-raised">
+                                        <md-tooltip md-direction="bottom">Adicionar registro </md-tooltip>
+                                        <md-icon class="material-icons">note_add</md-icon>
+                                    </md-button>
+                                    <md-button data-toggle="modal" data-target="#modalImprimir" class="md-raised md-mini">
+                                        <md-tooltip md-direction="bottom">Abre as opçoes para imprimir a listagem</md-tooltip>
+                                        <md-icon class="material-icons">print</md-icon>
+                                    </md-button>
                                 </div>
                             </div>
                         </md-toolbar>
                         </div>
                         <md-table-container>
-                            <table md-table md-row-select multiple ng-model="vm.selected" md-progress="promise">
+                            <table md-table md-row-select multiple ng-model="vm.seleciona"  md-progress="promise">
                                 <thead md-head>
                                 <tr md-row>
-                                    <th md-column>Id</th>
-                                    <th md-column md-numeric>Imagem</th>
-                                    <th md-column md-numeric>Nome</th>
-                                    <th md-column md-numeric>Pais</th>
-                                    <th md-column md-numeric>Uf</th>
-                                    <th md-column md-numeric>Município</th>
-                                    <th md-column md-numeric>Opções</th>
+                                    <th md-column></th>
+                                    <th md-column>Imagem</th>
+                                    <th md-column>Nome</th>
+                                    <th md-column>Pais</th>
+                                    <th md-column>Uf</th>
+                                    <th md-column>Município</th>
+                                    <th md-column>Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody md-body>
@@ -44,23 +50,21 @@
                                     <td md-cell>{{pes.uf.nome}}</td>
                                     <td md-cell>{{pes.municipio.nome}}</td>
                                     <td md-cell>
-                                        <md-fab-speed-dial ng-hide="demo.hidden" md-direction="left" md-open="demo.isOpen"
-                                                           class="md-scale md-fab-md-mini-top-right" ng-class="{ 'md-hover-full': demo.hover }"
-                                                           ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
-                                            <md-fab-trigger>
-                                                <md-button aria-label="menu" class="md-fab md-md-mini md-primary">
-                                                    <md-icon class="material-icons">menu</md-icon>
-                                                </md-button>
-                                            </md-fab-trigger>
-                                            <md-fab-actions>
-                                                <md-button data-toggle="modal" data-target="#modalCadastroCliente" ng-click="vm.alterar(pes)" class="md-fab md-raised md-mini md-da">
-                                                    <md-icon class="material-icons">edit</md-icon>
-                                                </md-button>
-                                                <md-button ng-click="vm.excluir(pes)" class="md-fab md-raised md-mini">
-                                                    <md-icon alt="Excluir" class="material-icons">delete_forever</md-icon>
-                                                </md-button>
-                                            </md-fab-actions>
-                                        </md-fab-speed-dial>
+                                        <md-menu md-offset="0 -7">
+                                            <md-button  ng-mouseenter="$mdMenu.open()"  class="md-icon-button">
+                                                <md-icon class="material-icons">menu</md-icon>
+                                            </md-button>
+                                            <md-menu-content width="2"  ng-mouseleave="$mdMenu.close()">
+                                                <md-menu-item class="md-raised ">
+                                                    <md-button data-toggle="modal" data-target="#modalCadastroCliente" ng-click="vm.alterar(pes)">
+                                                        <span md-menu-align-target><md-icon class="material-icons">edit</md-icon></span>Editar</md-button>
+                                                </md-menu-item>
+                                                <md-menu-item class="md-raised ">
+                                                    <md-button ng-click="vm.excluir(pes)">
+                                                        <span md-menu-align-target><md-icon class="material-icons">delete_forever</md-icon></span>Remover </md-button>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
                                     </td>
                                 </tr>
                                 </tbody>

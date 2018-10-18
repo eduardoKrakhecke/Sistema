@@ -1,5 +1,5 @@
 
-app.controller("listaClienteController", function ( $scope, $http, $q,usuario, endereco, cliente, imprimir) {
+app.controller("listaClienteController", function ( $scope, $http, $q,usuario, endereco, cliente, imprimir, mensagem) {
     var vm = this;
     vm.doc = {};
     vm.pessoa={};
@@ -15,7 +15,7 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
     vm.ultimoRegistroDaPagina = 0;
     vm.parametrosImpressao = {};
     vm.habilitaFiltro = true;
-    vm.selected = [];
+    vm.seleciona= [];
 
     vm.filtrar = function(){
         if(vm.filtro.trim().length > 2){
@@ -90,7 +90,7 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
        }
        angular.merge(vm.pessoa,vm.pessoa.foto);
       cliente.salvar(vm.pessoa).then(function (retorno) {
-          mensagemSucesso("Registro salvo com sucesso");
+          mensagem.mensagemSucesso("Registro salvo com sucesso");
           vm.filtro="";
           vm.limparDadosModal();
           vm.carregarClientes();
@@ -127,7 +127,7 @@ app.controller("listaClienteController", function ( $scope, $http, $q,usuario, e
         mensagemConfirmacaoExclusao(pes.nome,function (result) {
             if(result) {
                 cliente.excluir(pes.idPessoa).then(function (retorno){
-                    mensagemSucesso("Registro excluído com sucesso.");
+                    mensagem.mensagemSucesso("Registro excluído com sucesso");
                     vm.filtro="";
                     vm.carregarClientes();
                 });

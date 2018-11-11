@@ -4,98 +4,36 @@
             Cadastro de Cliente
         </div>
         <div class="modal-body">
-            <form novalidate name="formCliente" role="form">
-                <div ng-hide="true" class="row">
-                    <div class="form-group col-md-12">
-                        <div  class="custom-control custom-checkbox form-group col-md-12">
-                            <div  class="form-group col-md-6">
-                                <input  ng-model="vm.capturarFoto" type="checkbox" id="checkCaptura" class="custom-control-input col-md-6">
-                                <label class="custom-control-label" for="checkCaptura"><p class="fontSize">Capturar foto com a câmera</p></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div ng-if="!vm.capturarFoto" class="form-group col-md-2">
-                        <div class="form-group">
-                            <img type="image" ng-click="vm.carregaImagem()" name="imagem" id="imagem" width="120" height="125" class="img-responsive"
-                                 ng-model="vm.pessoa.foto" ng-src="{{vm.pessoa.foto || './image/semfoto.png' }}"/>
-                            <input name="imagem" type="file" id="inputFile" onchange="readURL(this);" style="display: none;"/>
-                        </div>
-                    </div>
-                    <div class="form-group row col-md-10">
+            <form novalidate="novalidate" name="formCliente" role="form" class="requerido">
+                    <div class="form-group row col-md-12">
                         <div class="form-group col-md-5">
-                            <input type="text" ng-model="vm.pessoa.nome" maxlength="80" placeholder="Nome" class="form-control form-control-sm"/>
+                            <label class="formataLabel">Nome</label>
+                            <input type="text" ng-model="vm.cliente.nome" maxlength="80" placeholder="Nome" class="form-control form-control-sm" required/>
                         </div>
                         <div class="form-group col-md-3">
-                            <input type="text" ng-model="vm.pessoa.rg" maxlength="10" placeholder="RG" class="form-control form-control-sm"/>
+                            <label class="formataLabel">Limite de crédito</label>
+                            <input type="text" ng-model="vm.cliente.limiteCredito"  money-mask money-mask-prepend="R$ " placeholder="Limite de crédito" class="form-control form-control-sm" required/>
                         </div>
-                        <div class="form-group col-md-4">
-                            <input type="text" ng-model="vm.pessoa.cpf" maxlength="11" placeholder="CPF" class="form-control form-control-sm"/>
-                        </div>
-                        <div class=" form-group col-md-5">
-                            <select ng-required="true" ng-model="vm.pessoa.pais.idPais" ng-options="pais.idPais as pais.nome for pais in paises" ng-change="vm.selecionaPais(vm.pessoa.pais.idPais)"
-                                    class="form-control-sm col-md-12">
-                                <option value="" disabled selected>Selecione o país</option>
-                            </select>
-                        </div>
+
                         <div class=" form-group col-md-3">
-                            <select ng-disabled="vm.pessoa.pais.idPais!=31" ng-model="vm.pessoa.uf.idUf" ng-options="uf.idUf as uf.nome for uf in ufs" ng-change="vm.selecionaId(vm.pessoa.uf.idUf)"
-                                    class="form-control-sm col-md-12">
-                                <option value="" disabled selected>Selecione a Uf</option>
+                            <label class="formataLabel">Tipo de Risco</label>
+                            <select ng-model="vm.cliente.risco.idRisco" ng-options="risco.idRisco as risco.tipoRisco for risco in vm.riscos"
+                                    ng-change=" vm.riscoSelecionado(vm.cliente.risco.idRisco)"  class="form-control form-control-sm" required>
+                                <option value="" disabled selected >Selecione o tipo de risco</option>
                             </select>
                         </div>
-                        <div class=" form-group col-md-4">
-                            <select ng-disabled="!vm.pessoa.uf.idUf || vm.pessoa.pais.idPais!=31" ng-model="vm.pessoa.municipio.idMunicipio"
-                                    ng-options="mun.idMunicipio as mun.nome for mun in municipios"
-                                    class="form-control-sm col-md-12">
-                                <option value="" disabled selected>Selecione o Município</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-5">
-                            <input type="text" ng-model="vm.pessoa.email" maxlength="11" placeholder="Email" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <input type="text" ng-model="vm.pessoa.telefone" maxlength="11" placeholder="Telefone" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <input type="text" ng-model="vm.pessoa.celular" maxlength="11" placeholder="Celular" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <div class=" float-right">
-                                <button data-toggle="modal" data-target="#modalAdicionarDoc" class="btn btn-blue-grey btn-sm mt-1">Adicionar documentos</button>
-                            </div>
+
+                        <div ng-if="vm.cliente.risco.idRisco == 2 || vm.cliente.risco.idRisco == 3" class="form-group col-md-5">
+                            <label class="formataLabel">Taxa de juros %</label>
+                            <input disabled type="number"  ng-model="vm.cliente.risco.taxaJuro" class="form-control form-control-sm">
                         </div>
                     </div>
-                    <div class="container-fluid">
-                        <div class="row col-md-12">
-                            <table class="table table-hover table-sm table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>Tipo de documento</th>
-                                    <th>Documento</th>
-                                    <th>Opções</th>
-                                </tr>
-                                </thead>
-                                <tbody ng-repeat=" pesDoc in vm.pessoa.pessoaDocumentos">
-                                <tr>
-                                    <td>{{pesDoc.tipoDocumento}}</td>
-                                    <td>{{pesDoc.documento}}</td>
-                                    <td>
-                                        <button ng-click="vm.removerItemLista(pesDoc)" class="btn btn-danger btnReduzido">X</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </form>
+
         </div>
         <div class="modal-footer d-flex justify-content-center">
-            <button data-dismiss="modal" ng-click="vm.salvarCliente()" class="btn btn-blue-grey btn-sm mt-1">Salvar</button>
-            <button class="btn btn-blue-grey btn-sm mt-1">Salvar e adicionar novo registro</button>
-            <button ng-click="vm.limparDadosModal()" data-dismiss="modal" class="btn btn-blue-grey btn-sm mt-1">Cancelar</button>
+            <button ng-disabled="formCliente.$invalid" data-dismiss="modal" ng-click="vm.salvarCliente(formCliente)" class="btn btn-blue-grey btn-sm mt-1">Salvar</button>
+            <button ng-click="vm.limparDadosModal(formCliente)" data-dismiss="modal" class="btn btn-blue-grey btn-sm mt-1">Cancelar</button>
         </div>
     </div>
 </div>

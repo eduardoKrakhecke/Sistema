@@ -6,7 +6,7 @@ app.controller("loginController", function ($http, $location, $q) {
     vm.autenticar = function () {
         $http.post("/autenticar", vm.usuario).then(function (response) {
                 $q.when();
-                location.href = "home#!/?parametros=";
+                location.href = "home#!/?";
             },
             function (response) {
                 notif({'type':'error','msg':'Usuário ou Senha inválida','position': 'center'})

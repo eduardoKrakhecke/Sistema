@@ -1,29 +1,6 @@
-.table-wrapper-scroll-y {
-    display: block;
-    min-height: 100px;
-    max-height: min-content;
-    overflow-y: auto;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-}
 
 .modal-lg {
     max-width: 80% !important;
-}
-
-.btnReduzido {
-    padding: .0rem 0.4rem;
-    font-size: .6rem;
-}
-
-.scrollTableModal {
-    max-height: 200px;
-    overflow-y: auto;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-}
-
-.modal-body {
-    max-height: calc(100vh - 210px) !important;
-    overflow-y: auto !important;
 }
 
 .fontSize{
@@ -35,14 +12,22 @@
 }
 
 
-.body{
-    overflow: visible;
-}
-
-.md-autocomplete-suggestions-container{
-    z-index:100000 !important; /* any number of choice > 1050*/
-}
-
 .material-icons{
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+}
+
+
+.branco{
+    color: #f7f7f7;
+}
+
+.requerido input.ng-invalid.ng-touched {
+    border-color: red;
+}
+.requerido select.ng-invalid.ng-touched {
+    border-color: red;
+}
+.formataLabel {
+    font-size: 13px;
+    font-weight: bold;
 }

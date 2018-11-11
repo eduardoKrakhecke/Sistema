@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Map;
 
 public class Crypto {
 
@@ -14,6 +15,7 @@ public class Crypto {
         byte[] hash = digest.digest(data.getBytes("UTF-8"));
         return bytesToHex(hash); // make it printable
     }
+
 
     private String bytesToHex(byte[] hash) {
         return DatatypeConverter.printHexBinary(hash);

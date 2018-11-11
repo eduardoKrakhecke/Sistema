@@ -1,5 +1,5 @@
 
-app.controller("homeController", function ($http, $location, $q, $cookies, usuario,$rootScope) {
+app.controller("homeController", function ($location, $q, $cookies, usuario,$rootScope) {
 
     var vm = this;
     vm.usuario = {};
@@ -13,6 +13,7 @@ app.controller("homeController", function ($http, $location, $q, $cookies, usuar
         location.href = "/";
     }
 
+
     vm.sair = function () {
         $cookies.remove("userToken");
         location.href = "/";
@@ -24,5 +25,6 @@ app.controller("homeController", function ($http, $location, $q, $cookies, usuar
         });
         $location.path(pagina);
     };
+
 
 });

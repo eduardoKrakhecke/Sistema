@@ -27,24 +27,23 @@ public class Usuarios implements Serializable {
     private String senha;
 
     @Column(name = "flag_administrador")
-    private int flagAdministrador;
+    private boolean flagAdministrador;
 
     @Column(name = "foto_usuario", columnDefinition="TEXT")
     private String fotoUsuario;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy="usuario")
-    private List<Permissoes> permissoes;
 
     public Usuarios() {
     }
 
-    public int getFlagAdministrador() {
+    public boolean isFlagAdministrador() {
         return flagAdministrador;
     }
 
-    public void setFlagAdministrador(int flagAdministrador) {
+    public void setFlagAdministrador(boolean flagAdministrador) {
         this.flagAdministrador = flagAdministrador;
     }
+
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -94,11 +93,4 @@ public class Usuarios implements Serializable {
         this.fotoUsuario = fotoUsuario;
     }
 
-    public List<Permissoes> getPermissoes() {
-        return permissoes;
-    }
-
-    public void setPermissoes(List<Permissoes> permissoes) {
-        this.permissoes = permissoes;
-    }
 }

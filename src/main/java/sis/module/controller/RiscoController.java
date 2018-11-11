@@ -5,20 +5,20 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import sis.module.model.Paises;
-import sis.module.service.PaisesService;
+import sis.module.model.Risco;
+import sis.module.service.RiscoService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/user")
-public class PaisesController {
+public class RiscoController {
 
     @Autowired
-    PaisesService paisesService;
+    RiscoService riscoService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/paises", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Paises> buscarProdutosPaginados() {
-        return  paisesService.buscaPaises();
+    @RequestMapping(method = RequestMethod.GET, value = "/risco", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Risco> buscarRiscos() {
+        return  riscoService.buscaRisco();
     }
 }

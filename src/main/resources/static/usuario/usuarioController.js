@@ -1,5 +1,5 @@
 
-app.controller("usuarioController", function ( $http, $location, $q,usuario) {
+app.controller("usuarioController", function ( $http, $location, $q,usuario, mensagem) {
 
     var vm = this;
     vm.usuario={};
@@ -9,6 +9,6 @@ app.controller("usuarioController", function ( $http, $location, $q,usuario) {
         vm.usuario.fotoUsuario = retorno.fotoUsuario;
         vm.imagemUsuario = vm.usuario.fotoUsuario || './image/semfoto.png';
     }, function errorCallback(retorno) {
-        mensagemErroUsuario();
+        mensagem.mensagemErroUsuario();
     });
 });

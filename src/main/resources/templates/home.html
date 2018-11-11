@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-br"  ng-app="app">
+<html lang="pt-br"  ng-app="app" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <base href="/"></base>
-    <title>Ready</title>
+    <title>Prova Desenvolvedor</title>
     <link rel="shortcut icon" href="./image/icone.ico"/>
 
     <link rel="stylesheet" href="./bibliotecas/jQuery/angular/bootstrap/css/mdb.min.css">
     <link rel="stylesheet" href="./bibliotecas/jQuery/angular/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./bibliotecas/jQuery/angular/bootstrap/css/style.min.css">
 
-    <link rel="stylesheet" href="./cssTemplate/home.css">
     <link rel="stylesheet" href="./app/cssGlobal.css">
-    <link rel="stylesheet" href="./module/listaProdutoComponent/listaProduto.css">
     <link rel="stylesheet" href="./module/cadastroClienteComponent/cadastroCliente.css">
 
-
-    <link rel="stylesheet" href="./bibliotecas/jQuery/angular/bootstrap/css/font-awesome.css">
     <link rel="stylesheet" href="./bibliotecas/jQuery/angular/libraries/notifIt.css">
 
     <link rel="stylesheet" href="./bibliotecas/jQuery/angular/angular-material/angular-material.css">
@@ -40,98 +36,43 @@
     <script type="text/javascript" src="./bibliotecas/jQuery/angular/angular-messages.min.js"></script>
     <script type="text/javascript" src="./bibliotecas/jQuery/angular/angular-material/angular-material.min.js"></script>
     <script type="text/javascript" src="./bibliotecas/jQuery/angular/angular-material/md-data-table.min.js"></script>
-    <script type="text/javascript" src="./bibliotecas/jQuery/angular/fixed-table-header.min.js"></script>
-
-    <script type="text/javascript" src="./bibliotecas/jQuery/angular/infinityScrool.js"></script>
-
-    <script type="text/javascript" src="./mesages/mesages.js"></script>
-    <script type="text/javascript" src="./functions/functions.js"></script>
+    <script type="text/javascript" src="./bibliotecas/jQuery/angular/rw-money-mask.min.js"></script>
 
     <script type="text/javascript" src="app/app.js"></script>
 
 
 
 </head>
+
 <body>
 <div ng-controller="homeController as vm">
-    <nav class="navbar navbar-expand-lg navbar-dark blue-grey fixed-top" >
-        <a class="navbar-brand">
-           <img src="./image/logo.png" height="30" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarCadastros" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        Cadastros
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarCadastros">
-                        <a class="dropdown-item" ng-click="vm.goToPagina('cliente')">Clientes</a>
-                        <a class="dropdown-item" ng-click="vm.goToPagina('produto')">Produtos</a>
-                        <a class="dropdown-item" ng-click="vm.goToPagina('estoque')">Estoque</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarAcompanhamentos" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        Acompanhamentos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarAcompanhamentos">
-                        <a class="dropdown-item" ng-click="vm.goToPagina('inspecao')">Inspeções</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarPedidos" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        Pedidos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarPedidos">
-                        <a class="dropdown-item" ng-click="vm.goToPagina('orcamento')">Orçamento</a>
-                        <a class="dropdown-item" ng-click="vm.goToPagina('pedido')">Pedido</a>
-                        <a class="dropdown-item" ng-click="vm.goToPagina('notaFiscal')">Nota Fiscal</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarConfiguracao" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        Configurações
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarConfiguracao">
-                        <a class="dropdown-item" ng-click="vm.goToPagina('usuario')">Usuários</a>
-                        <a class="dropdown-item">Preferências</a>
-                    </div>
-                </li>
-            </ul>
+    <md-toolbar class="blue-grey" >
+        <div class="md-toolbar-tools">
+            <md-menu-bar>
+                    <button class="branco" ng-click="vm.goToPagina('cliente')">
+                       Clientes
+                    </button>
+            </md-menu-bar>
+            <h2 flex md-truncate></h2>
+                <md-menu-item>
+                    <md-menu>
+                        <md-button aria-label="perfilusuario" ng-mouseenter="$mdMenu.open()"> <img class="rounded-circle img-fluid imagePointer" ng-src="{{vm.imagemUsuario}}" height="30" width="45" alt=""></md-button>
+                        <md-menu-content ng-mouseleave="$mdMenu.close()">
+                            <md-menu-item ><md-button ng-click="vm.sair($event)" >Sair</md-button></md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-item>
         </div>
-        <div class="dropdown collapse navbar-collapse justify-content-end">
-            <img data-toggle="dropdown" class="rounded-circle img-fluid imagePointer" id="dropdownImagem" ng-src="{{vm.imagemUsuario}}" height="30" width="45" alt="">
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownImagem">
-                <a class="dropdown-item" data-toggle="modal" data-target="#modalPerfilUsuario">Perfil</a>
-                <a class="dropdown-item" ng-click="vm.goToPagina('configuracao')">Configurações</a>
-                <a class="dropdown-item" ng-click="vm.sair()">Sair</a>
-            </div>
-        </div>
-    </nav>
+    </md-toolbar>
 </div>
 
-
-<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modalPerfilUsuario" role="dialog">
-    <div ng-include src="'./usuario/usuario.html'"></div>
-</div>
 
 <div ng-view=""></div>
 
 
 <footer class="page-footer font-small blue-grey fixed-bottom">
     <div class="footer-copyright text-center py-0">© 2018 Copyright:
-        <a href=""> FullStackDeveloper</a>
+        <a href="">Prova desenvolvedor</a>
         <p class="text-center mb-0">Versão 1.00</p>
     </div>
 </footer>
@@ -143,21 +84,15 @@
 <script type="text/javascript" src="./bibliotecas/jQuery/angular/bootstrap/js/mdb.min.js"></script>
 
 <script type="text/javascript" src="./service/usuarioService.js"></script>
-<script type="text/javascript" src="./service/imprimirService.js"></script>
 
-<script type="text/javascript" src="./moduloService/produtoService.js"></script>
-<script type="text/javascript" src="./moduloService/enderecoService.js"></script>
-<script type="text/javascript" src="./moduloService/pessoaService.js"></script>
-<script type="text/javascript" src="./moduloService/estoqueService.js"></script>
-<script type="text/javascript" src="./moduloService/unidadeMedidaService.js"></script>
+<script type="text/javascript" src="./moduloService/clienteService.js"></script>
+<script type="text/javascript" src="./moduloService/riscoService.js"></script>
+
+
 <script type="text/javascript" src="./functionService/mesageService.js"></script>
-
 
 <script type="text/javascript" src="./controllerTemplate/homeController.js"></script>
 <script type="text/javascript" src="./usuario/usuarioController.js"></script>
-<script type="text/javascript" src="./module/listaProdutoComponent/listaProdutoController.js"></script>
 <script type="text/javascript" src="./module/listaClienteComponent/listaClienteController.js"></script>
-<script type="text/javascript" src="./module/listaEstoqueComponent/listaEstoqueController.js"></script>
-<script type="text/javascript" src="./module/cadastroProdutoComponent/cadastroProdutoController.js"></script>
-<script type="text/javascript" src="./module/cadastroClienteComponent/cadastroClienteController.js"></script>
+
 </html>

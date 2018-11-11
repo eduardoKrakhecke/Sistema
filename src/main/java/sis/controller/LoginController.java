@@ -56,8 +56,8 @@ public class LoginController {
         }
 
         Map<String, Object> claims = new HashMap<>();
-        claims.put("admin", usuariosAutenticado.getFlagAdministrador() == 1);
-        claims.put("username", usuariosAutenticado.getLogin());
+        claims.put("admin", usuariosAutenticado.isFlagAdministrador());
+        claims.put("username", usuariosAutenticado.getNome());
         claims.put("userkey", usuariosAutenticado.getIdUsuario());
 
         HttpSession session = request.getSession();
